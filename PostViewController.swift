@@ -22,6 +22,16 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         imagePicker.delegate = self
 
     }
+    
+    func noCamera() {
+        let alertVC = UIAlertController(title: "No Camera",
+                                        message: "This device does not have a camera",
+                                        preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertVC.addAction(okAction)
+        presentViewController(alertVC, animated: true, completion: nil)
+    }
+    
 
     
     @IBAction func onImagePickerButtonTapped(sender: AnyObject) {
@@ -29,6 +39,21 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         imagePicker.sourceType = .PhotoLibrary
         
         presentViewController(imagePicker, animated: true, completion: nil)
+        
+        
+    }
+    
+    
+    @IBAction func onCameraButtonTapped(sender: AnyObject) {
+        if UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil {
+            imagePicker.allowsEditing = false
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+            imagePicker.cameraCaptureMode = .Photo
+            imagePicker.modalPresentationStyle = .FullScreen
+            presentViewController(imagePicker, animated: true, completion: nil)
+        } else {
+            noCamera()
+        }
         
         
     }

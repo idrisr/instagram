@@ -25,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="338"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nq3-fl-p29" id="adM-od-xDM">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="337"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="337.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -89,7 +89,11 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="GKM-X2-Oyl"/>
-                        <barButtonItem image="camera" id="kwc-mF-5dN"/>
+                        <barButtonItem image="camera" id="kwc-mF-5dN">
+                            <connections>
+                                <action selector="onCameraButtonTapped:" destination="yCs-SU-HTH" id="GMG-AF-bPF"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="hCf-Ye-ody"/>
                         <barButtonItem title="Filter" id="x16-lQ-Fgp"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="QEx-bb-CVl"/>
