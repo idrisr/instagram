@@ -22,9 +22,29 @@ likes added
 likes deleted
 */
 
+//  define protocol
+protocol ReloadPostsDelegate {
+    func reloadModel()
+}
+
 class ConnectionController {
-    let firebaseURL = "https://glowing-inferno-2878.firebaseio.com/"
+    let ref = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/")
+    let postRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/posts")
+    let userRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/users")
+    var posts = [Post]()
 
+    var reloadPostsDelegate: ReloadPostsDelegate?
 
+    static let sharedConnection = ConnectionController()
 
+    func allPosts() {
+        postRef.observeEventType(.Value, withBlock: { snapshot in
+            for item in snapshot.children {
+                let post = Post(snapshot: item as! FDataSnapshot)
+                self.posts.append(post)
+                print(post.caption)
+            }
+            self.reloadPostsDelegate?.reloadModel()
+        })
+    }
 }

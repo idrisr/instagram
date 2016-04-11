@@ -1,0 +1,48 @@
+{
+    "users": {
+        "1":{
+            "friends" : {},
+            "posts" : {"1": true, "2": true},
+            "name" : "sadmichaeljordan"
+        },
+
+        "2": {
+            "friends" : {"Matt": true, "Dan": true},
+            "posts" : {"3": true},
+            "name" : "idris"
+        }, 
+
+        "3": {
+            "friends" : {"idris": true},
+            "posts" : {},
+            "name" : "Matt"
+        },
+
+        "4": {
+            "friends" : {},
+            "posts" : {},
+            "name" : "Jon"
+        }
+    },
+
+    "posts" : {
+        "1":  {
+            "id": "1",
+            "owner": "idris",
+            "caption": "sad MJ",
+            "photo": "<<4302_michael_jordan.jpg>>"
+        },
+        "2":  {
+            "id": "2",
+            "owner": "Dan",
+            "caption": "hulk MJ",
+            "photo": "<<tumblr_nkpq38A31o1uptjfqo1_250.jpg>>"
+        },
+        "3":  {
+            "id": "3",
+            "owner": "Dan",
+            "caption": "flying MJ",
+            "photo": "<<flying_mj.jpeg>>"
+        }
+    }
+}

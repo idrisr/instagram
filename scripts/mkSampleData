@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+echo "Making Sample Data"
+bash ./_processJson.sh sample.template.json > processed.json
+echo "Finished Making Mample Data"
