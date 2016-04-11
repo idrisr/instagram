@@ -25,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="338"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nq3-fl-p29" id="adM-od-xDM">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="337.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="337"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -93,7 +93,11 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="hCf-Ye-ody"/>
                         <barButtonItem title="Filter" id="x16-lQ-Fgp"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="QEx-bb-CVl"/>
-                        <barButtonItem title="Post" id="2Zg-cl-erC"/>
+                        <barButtonItem title="Post" id="2Zg-cl-erC">
+                            <connections>
+                                <action selector="onButtonPressed:" destination="yCs-SU-HTH" id="6Jo-Lh-gRY"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <connections>
                         <outlet property="imageView" destination="OVr-vx-ehK" id="nch-N1-Hft"/>

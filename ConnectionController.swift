@@ -27,6 +27,10 @@ protocol ReloadPostsDelegate {
     func reloadModel()
 }
 
+protocol SavePostDelegate {
+    func savePost(post:Post)
+}
+
 class ConnectionController {
     let ref = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/")
     let postRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/posts")
@@ -46,5 +50,10 @@ class ConnectionController {
             }
             self.reloadPostsDelegate?.reloadModel()
         })
+    }
+
+    func savePost(post: Post) {
+        let childRef = self.postRef.childByAutoId()
+        childRef.setValue(post.toAnyObject())
     }
 }

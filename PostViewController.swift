@@ -14,10 +14,11 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var imageView: UIImageView!
     
     let imagePicker = UIImagePickerController()
-    
+    let connectionController = ConnectionController.sharedConnection
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         imagePicker.delegate = self
 
     }
@@ -32,6 +33,10 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
     }
     
+    @IBAction func onButtonPressed(sender: AnyObject) {
+        let post = Post(image: imageView.image!)
+        connectionController.savePost(post)
+    }
     
     // MARK: - UIImagePickerControllerDelegate Methods
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
