@@ -24,7 +24,7 @@ struct Post:Equatable {
     // var user: User
 
     static func image2String(image: UIImage) -> String {
-        let imageData = UIImagePNGRepresentation(image);
+        let imageData = UIImageJPEGRepresentation(image, 0.5);
         let imageString = imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
         return imageString
     }
