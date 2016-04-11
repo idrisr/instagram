@@ -9,12 +9,18 @@
 import UIKit
 import Firebase
 
-struct Post {
+// Implement Equatable
+func ==(lhs:Post, rhs:Post) -> Bool { // Implement Equatable
+    return lhs.id == rhs.id
+}
+
+struct Post:Equatable {
     var image: UIImage
 //    var comments = [String]()
     var likes = 0
     var caption: String
     let ref: Firebase?
+    var id: String?
     // var user: User
 
     static func image2String(image: UIImage) -> String {
@@ -34,6 +40,7 @@ struct Post {
         image = Post.string2Image(imageString)
         caption = (snapshot.value["caption"] as! String?)!
         ref = snapshot.ref
+        id = snapshot.key
     }
 
     // init from device

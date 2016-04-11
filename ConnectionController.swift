@@ -31,6 +31,8 @@ protocol SavePostDelegate {
     func savePost(post:Post)
 }
 
+// TODO: handle post deletion
+
 class ConnectionController {
     let ref = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/")
     let postRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/posts")
@@ -45,8 +47,9 @@ class ConnectionController {
         postRef.observeEventType(.Value, withBlock: { snapshot in
             for item in snapshot.children {
                 let post = Post(snapshot: item as! FDataSnapshot)
-                self.posts.append(post)
-                print(post.caption)
+                if !self.posts.contains(post) {
+                    self.posts.append(post)
+                }
             }
             self.reloadPostsDelegate?.reloadModel()
         })
