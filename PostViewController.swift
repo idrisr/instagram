@@ -36,6 +36,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBAction func onButtonPressed(sender: AnyObject) {
         let post = Post(image: imageView.image!)
         connectionController.savePost(post)
+        self .dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: - UIImagePickerControllerDelegate Methods
