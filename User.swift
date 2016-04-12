@@ -11,24 +11,28 @@ import Firebase
 
 struct User {
     var name: String
+    var username: String
     var email: String
     let ref: Firebase?
     var id: String?
-    var password: String
-
-    func toAnyObject() -> AnyObject {
-        return ["id": ""]
-    }
 
 //    // init from firebase
 //    init(snapshot: FDataSnapshot) {
 //    }
 
     // init from device
-    init(email: String, password: String) {
+    init(email: String) {
         self.email = email
-        self.password = password
         self.name = ""
+        self.username = ""
         self.ref = nil
+    }
+
+    func toAnyObject() -> AnyObject {
+        return [
+            "name": name,
+            "username": username,
+            "email": email
+        ]
     }
 }

@@ -32,19 +32,23 @@ protocol SavePostDelegate {
 }
 
 protocol CreateUserDelegate {
-    func createUser()
+    func createFirebaseUserWithEmail(_:String, password:String)
 }
 
-// TODO: handle post deletion
+protocol AuthenticationDelegate {
+    func didAuthenticate()
+}
 
 class ConnectionController {
     let ref = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/")
     let postRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/posts")
     let userRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/users")
+
     var posts = [Post]()
 
     var reloadPostsDelegate: ReloadPostsDelegate?
     var createUserDelegate: CreateUserDelegate?
+    var authenticationDelegate: AuthenticationDelegate?
 
     static let sharedConnection = ConnectionController()
 
@@ -66,10 +70,28 @@ class ConnectionController {
         childRef.setValue(post.toAnyObject())
     }
 
-    func createUser() {
-        self.ref.createUser("email", password: "password") { (error: NSError!) in
+    func createFirebaseUserWithEmail(email:String?, password:String?) {
+        // TODO guard against nils for email and password
+
+        // create firebase authentication user
+        self.ref!.createUser(email, password: password) { (error: NSError!) in
             if error == nil {
+                self.authorizeUser(email, password: password)
+            } else {
+                print(error.localizedDescription)
             }
         }
+
+        // create user object
+        let user = User(email: email!)
+        let childRef = self.userRef.childByAutoId()
+        childRef.setValue(user.toAnyObject())
+    }
+
+    func authorizeUser(email: String?, password: String?) {
+        self.ref!.authUser(email, password: password,
+                     withCompletionBlock: { (error, auth) in
+                        self.authenticationDelegate?.didAuthenticate()
+        })
     }
 }

@@ -168,7 +168,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="p7n-xY-Ube" id="YKR-dM-Rq5"/>
                         <outlet property="passwordTextField" destination="bfz-MP-4ia" id="9VJ-Km-qF0"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="loginToFeed" id="YbN-ag-jWg"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="segueToFeed" id="YbN-ag-jWg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HWo-WK-WZu" userLabel="First Responder" sceneMemberID="firstResponder"/>
