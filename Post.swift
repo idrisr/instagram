@@ -37,17 +37,17 @@ struct Post:Equatable {
     // init from firebase
     init(snapshot: FDataSnapshot) {
         let imageString = snapshot.value["image"] as! String
-        image = Post.string2Image(imageString)
-        caption = (snapshot.value["caption"] as! String?)!
-        ref = snapshot.ref
-        id = snapshot.key
+        self.image = Post.string2Image(imageString)
+        self.caption = (snapshot.value["caption"] as! String?)!
+        self.ref = snapshot.ref
+        self.id = snapshot.key
     }
 
     // init from device
     init(image: UIImage) {
         self.image = image
-        caption = "to do"
-        ref = nil
+        self.caption = "to do"
+        self.ref = nil
     }
 
     func description() -> String {

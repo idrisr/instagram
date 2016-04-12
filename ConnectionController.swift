@@ -31,6 +31,10 @@ protocol SavePostDelegate {
     func savePost(post:Post)
 }
 
+protocol CreateUserDelegate {
+    func createUser()
+}
+
 // TODO: handle post deletion
 
 class ConnectionController {
@@ -40,6 +44,7 @@ class ConnectionController {
     var posts = [Post]()
 
     var reloadPostsDelegate: ReloadPostsDelegate?
+    var createUserDelegate: CreateUserDelegate?
 
     static let sharedConnection = ConnectionController()
 
@@ -58,5 +63,12 @@ class ConnectionController {
     func savePost(post: Post) {
         let childRef = self.postRef.childByAutoId()
         childRef.setValue(post.toAnyObject())
+    }
+
+    func createUser() {
+        self.ref.createUser("email", password: "password") { (error: NSError!) in
+            if error == nil {
+            }
+        }
     }
 }
