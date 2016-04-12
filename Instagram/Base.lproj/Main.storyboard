@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -71,16 +72,48 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OVr-vx-ehK">
-                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="300"/>
                             </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VII-eA-Ulg">
+                                <rect key="frame" x="0.0" y="372" width="600" height="176"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="176" id="vrk-Mh-jrI"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FilterCell" id="ukj-PO-U0n">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ukj-PO-U0n" id="2vR-S2-8fQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="yCs-SU-HTH" id="7My-uX-2WJ"/>
+                                    <outlet property="delegate" destination="yCs-SU-HTH" id="QqC-62-9rB"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="OVr-vx-ehK" firstAttribute="top" secondItem="Crr-UV-7Eq" secondAttribute="bottom" id="MKf-AD-4Yg"/>
-                            <constraint firstItem="OVr-vx-ehK" firstAttribute="leading" secondItem="9dV-wQ-c60" secondAttribute="leading" id="TJo-Ml-kRm"/>
-                            <constraint firstItem="2XT-jO-aLj" firstAttribute="top" secondItem="OVr-vx-ehK" secondAttribute="bottom" id="TYb-eT-BZH"/>
-                            <constraint firstAttribute="trailing" secondItem="OVr-vx-ehK" secondAttribute="trailing" id="ums-4w-7cJ"/>
+                            <constraint firstItem="OVr-vx-ehK" firstAttribute="leading" secondItem="9dV-wQ-c60" secondAttribute="leading" id="4Aa-Sw-50n"/>
+                            <constraint firstItem="OVr-vx-ehK" firstAttribute="top" secondItem="Crr-UV-7Eq" secondAttribute="bottom" id="9Vq-cS-M5z"/>
+                            <constraint firstItem="OVr-vx-ehK" firstAttribute="centerX" secondItem="9dV-wQ-c60" secondAttribute="centerX" id="DRc-B4-BM6"/>
+                            <constraint firstItem="OVr-vx-ehK" firstAttribute="leading" secondItem="VII-eA-Ulg" secondAttribute="leading" id="EBb-jp-idF"/>
+                            <constraint firstAttribute="trailing" secondItem="OVr-vx-ehK" secondAttribute="trailing" id="Y6b-aO-1RF"/>
+                            <constraint firstItem="VII-eA-Ulg" firstAttribute="top" secondItem="OVr-vx-ehK" secondAttribute="bottom" constant="8" symbolic="YES" id="Z1P-rl-OL7"/>
+                            <constraint firstItem="2XT-jO-aLj" firstAttribute="top" secondItem="VII-eA-Ulg" secondAttribute="bottom" constant="8" symbolic="YES" id="beK-ta-77x"/>
+                            <constraint firstItem="OVr-vx-ehK" firstAttribute="trailing" secondItem="VII-eA-Ulg" secondAttribute="trailing" id="bxr-Xx-tEh"/>
+                            <constraint firstItem="OVr-vx-ehK" firstAttribute="leading" secondItem="9dV-wQ-c60" secondAttribute="leadingMargin" constant="80" id="rJj-Mf-Ljl"/>
+                            <constraint firstItem="OVr-vx-ehK" firstAttribute="top" secondItem="Crr-UV-7Eq" secondAttribute="bottom" id="uoq-RX-uUi"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="rJj-Mf-Ljl"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems>
                         <barButtonItem image="film" id="vPC-Mi-GvS">
@@ -105,6 +138,7 @@
                     </toolbarItems>
                     <connections>
                         <outlet property="imageView" destination="OVr-vx-ehK" id="nch-N1-Hft"/>
+                        <outlet property="tableView" destination="VII-eA-Ulg" id="cFu-89-xXn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1L-Sp-Jdt" userLabel="First Responder" sceneMemberID="firstResponder"/>
