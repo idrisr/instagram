@@ -51,6 +51,7 @@ class ConnectionController {
                     self.posts.append(post)
                 }
             }
+            self.posts = self.posts.reverse()
             self.reloadPostsDelegate?.reloadModel()
         })
     }
