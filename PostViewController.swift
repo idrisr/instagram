@@ -9,10 +9,11 @@
 import UIKit
 import CoreImage
 
-class PostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
+class PostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var captionTextField: UITextField!
     
     let imagePicker = UIImagePickerController()
     let connectionController = ConnectionController.sharedConnection
@@ -26,6 +27,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         super.viewDidLoad()
 
         imagePicker.delegate = self
+        captionTextField.delegate = self
         onCameraButtonTapped(self)
         
     }
@@ -66,9 +68,10 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     @IBAction func onButtonPressed(sender: AnyObject) {
-        let post = Post(image: imageView.image!)
-        connectionController.savePost(post)
-        navigationController!.popViewControllerAnimated(true)
+            let post = Post(image: imageView.image!, caption: captionTextField.text!)
+            connectionController.savePost(post)
+            navigationController!.popViewControllerAnimated(true)
+
     }
     
     // MARK: - UIImagePickerControllerDelegate Methods
@@ -113,6 +116,12 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         imageView.image = UIImage(CGImage: renderedImage)
     }
     
+    
+    // MARK: - TextField Delegate Methods
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
 
     
 }

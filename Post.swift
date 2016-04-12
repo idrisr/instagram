@@ -44,9 +44,9 @@ struct Post:Equatable {
     }
 
     // init from device
-    init(image: UIImage) {
+    init(image: UIImage, caption: String) {
         self.image = image
-        caption = "to do"
+        self.caption = caption
         ref = nil
     }
 
