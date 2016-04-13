@@ -9,23 +9,32 @@
 import UIKit
 import CoreImage
 
-class PostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var captionTextField: UITextField!
+    @IBOutlet weak var tableView: UITableView!
     
     let imagePicker = UIImagePickerController()
     let connectionController = ConnectionController.sharedConnection
+    
+    var filterNames: [String] = ["Instant", "Chrome", "Noir", "None"]
+    var filters: [String] = ["CIPhotoEffectInstant", "CIPhotoEffectChrome", "CIPhotoEffectNoir", "CIColorControls"]
+    
+    var originalImage = UIImage()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        captionTextField.delegate = self
+        onCameraButtonTapped(self)
     }
     
     func noCamera() {
         let alertVC = UIAlertController(title: "No Camera",
-                                        message: "This device does not have a camera",
+                                        message: "This device does not have a camera. Please select image from your photo gallery",
                                         preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: .Default, handler: onImagePickerButtonTapped)
         alertVC.addAction(okAction)
         presentViewController(alertVC, animated: true, completion: nil)
     }
@@ -49,7 +58,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     @IBAction func onButtonPressed(sender: AnyObject) {
-        let post = Post(image: imageView.image!, user: self.connectionController.user!)
+        let post = Post(image: imageView.image!, caption: captionTextField.text!, user: self.connectionController.user!)
         connectionController.savePost(post)
         navigationController!.popViewControllerAnimated(true)
     }
@@ -59,6 +68,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.contentMode = .ScaleAspectFit
             imageView.image = pickedImage
+            self.originalImage = pickedImage
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -66,4 +76,37 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    
+    // MARK: - TableViewControllerDelegate Methods
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.filters.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath)
+        cell.textLabel?.text = filterNames[indexPath.row]
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let CIfilterName = filters[indexPath.row]
+        print(CIfilterName)
+        
+        let context = CIContext(options: nil)
+        let startImage = CIImage(image: self.originalImage)
+        
+        let filteredImage = startImage?.imageByApplyingFilter(CIfilterName, withInputParameters: nil)
+        let renderedImage = context.createCGImage(filteredImage!, fromRect: filteredImage!.extent)
+        
+        imageView.image = UIImage(CGImage: renderedImage)
+    }
+    
+    // MARK: - TextFieldDelegate Methods
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
 }
