@@ -90,16 +90,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         return cell
     }
     
-    // MARK: - TextFieldDelegate Methods
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-    
-    // MARK: - TableView Delegate Methods
-    
-    
-
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let CIfilterName = filters[indexPath.row]
         print(CIfilterName)
@@ -109,8 +99,15 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         let filteredImage = startImage?.imageByApplyingFilter(CIfilterName, withInputParameters: nil)
         let renderedImage = context.createCGImage(filteredImage!, fromRect: filteredImage!.extent)
-        
-        imageView.image = UIImage(CGImage: renderedImage)
+        let orientedImage = UIImage(CGImage: renderedImage, scale: 1, orientation: self.originalImage.imageOrientation)
+
+        imageView.image = orientedImage
+    }
+    
+    // MARK: - TextFieldDelegate Methods
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     

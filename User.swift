@@ -15,6 +15,7 @@ struct User {
     var email: String
     let ref: Firebase?
     var uid: String
+    var postIDs : [String]
 
     // init from device
     init(email: String, uid:String, ref: Firebase) {
@@ -23,17 +24,25 @@ struct User {
         self.name = ""
         self.username = ""
         self.ref = ref
+        self.postIDs = []
     }
 
     // init from firebase
     init(snapshot: FDataSnapshot) {
         self.name = snapshot.value["name"] as! String?
         self.email = snapshot.value["email"] as! String
+        self.username = ""
         self.ref = snapshot.ref
         self.uid = snapshot.key
+        // set postIDs
+        self.postIDs = snapshot.value["posts"] as! [String]
+    }
+
+    mutating func addPost(postID:String) {
+        postIDs.append(postID)
     }
 
     func toAnyObject() -> AnyObject {
-        return [ "name": name!, "username": username!, "email": email ]
+        return [ "name": name!, "username": username!, "email": email, "posts": postIDs]
     }
 }
