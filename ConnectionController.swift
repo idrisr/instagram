@@ -65,6 +65,10 @@ class ConnectionController {
 
     static let sharedConnection = ConnectionController()
 
+//    init() {
+//        setupListeners()
+//    }
+
     func allPosts() {
         postsRef.observeEventType(.Value, withBlock: { snapshot in
             for item in snapshot.children {
@@ -82,8 +86,18 @@ class ConnectionController {
     }
 
     func savePost(post: Post) {
+        // save post object
         let childRef = self.postsRef.childByAutoId()
-        childRef.setValue(post.toAnyObject())
+
+        childRef.setValue(post.toAnyObject()) { (error: NSError!, ref: Firebase!) in
+            if error == nil {
+                self.user?.addPost(ref.key)
+                let userRef = self.usersRef.childByAppendingPath(self.user?.uid)
+                userRef.setValue(self.user?.toAnyObject())
+            } else {
+                print(error.localizedDescription)
+            }
+        }
     }
 
     func createUser(email:String?, password:String?, uid: String) {
