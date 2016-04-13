@@ -35,7 +35,11 @@ struct User {
         self.ref = snapshot.ref
         self.uid = snapshot.key
         // set postIDs
-        self.postIDs = snapshot.value["posts"] as! [String]
+        if let posts = snapshot.value?["posts"] as? [String] {
+            self.postIDs = posts
+        } else {
+            self.postIDs = []
+        }
     }
 
     mutating func addPost(postID:String) {
