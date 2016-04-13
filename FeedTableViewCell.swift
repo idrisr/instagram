@@ -12,6 +12,17 @@ class FeedTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellImageView: UIImageView!
     @IBOutlet weak var cellCaptionLabel: UILabel!
+    @IBOutlet weak var userProfileImageView: UIImageView!
+    @IBOutlet weak var commentTextField: UITextField!
+    
+    @IBAction func onUserIDTapped(sender: AnyObject) {
+    }
+    
+    @IBAction func onCommentFieldTapped(sender: AnyObject) {
+    }
+    
+    @IBAction func onLikeButtonTapped(sender: AnyObject) {
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

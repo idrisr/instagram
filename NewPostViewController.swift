@@ -1,5 +1,5 @@
 //
-//  PostViewController.swift
+//  NewPostViewController.swift
 //  Instagram
 //
 //  Created by dp on 4/11/16.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreImage
 
-class PostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var captionTextField: UITextField!
