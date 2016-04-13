@@ -28,10 +28,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let reuseID = "postCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseID, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(reuseID, forIndexPath: indexPath) as! FeedTableViewCell
         let post = self.posts[indexPath.row]
-        cell.textLabel!.text = post.caption
-        cell.imageView!.image = post.image
+        
+        cell.cellImageView.image = post.image
+        cell.cellCaptionLabel.text = post.caption
+//        cell.textLabel!.text = post.caption
+//        cell.imageView!.image = post.image
         return cell
     }
 
