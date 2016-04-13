@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class LoginViewController: UIViewController, AuthenticationDelegate {
+class LoginViewController: UIViewController, AuthenticationDelegate, UserCreationDelegate {
 
     let connectionController = ConnectionController.sharedConnection
 
@@ -20,6 +20,7 @@ class LoginViewController: UIViewController, AuthenticationDelegate {
         super.viewDidLoad()
         self.passwordTextField.secureTextEntry = true
         self.connectionController.authenticationDelegate = self
+        self.connectionController.createUserDelegate = self
     }
 
     // MARK: IBActions
@@ -36,7 +37,41 @@ class LoginViewController: UIViewController, AuthenticationDelegate {
     }
 
     // MARK: AuthenticationDelegate
-    func userAuthenticated() {
+    func userAuthenticatedSuccess() {
         performSegueWithIdentifier("segueToFeed", sender: nil)
+    }
+
+    func userAuthenticatedFail(error:NSError) {
+        var message: String
+        switch error.code {
+        case -5:
+            message = "Invalid email address"
+        case -6:
+            message = "Incorrect Password"
+        default:
+            message =  "error logging in"
+        }
+
+        let alert = UIAlertController(title: "Login Error", message: message, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
+    func createUserFail(error: NSError) {
+        var message: String
+        switch error.code {
+        case -5:
+            message = "Invalid email address"
+        case -9:
+            message = "The specified email address is already in use"
+        default:
+            message =  "error creating user"
+        }
+
+        let alert = UIAlertController(title: "Login Error", message: message, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 }

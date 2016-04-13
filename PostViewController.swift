@@ -99,7 +99,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     // MARK: - TableView Delegate Methods
     
     
-    
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let CIfilterName = filters[indexPath.row]
         print(CIfilterName)

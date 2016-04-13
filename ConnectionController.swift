@@ -37,12 +37,13 @@ protocol ReloadUserPostsDelegate {
 
 
 // TODO: handle post deletion
-protocol CreateUserDelegate {
-    func createFirebaseUserWithEmail(_:String, password:String)
+protocol UserCreationDelegate {
+    func createUserFail(error: NSError)
 }
 
 protocol AuthenticationDelegate {
-    func userAuthenticated()
+    func userAuthenticatedSuccess()
+    func userAuthenticatedFail(error: NSError)
 }
 
 class ConnectionController {
@@ -52,7 +53,7 @@ class ConnectionController {
 
     var reloadPostsDelegate: ReloadPostsDelegate?
     var reloadUserPostsDelegate: ReloadUserPostsDelegate?
-    var createUserDelegate: CreateUserDelegate?
+    var createUserDelegate: UserCreationDelegate?
     var authenticationDelegate: AuthenticationDelegate?
 
     // private
@@ -94,7 +95,7 @@ class ConnectionController {
                 self.user = User(email: email!, uid: uid, ref: childRef)
                 childRef.setValue(self.user!.toAnyObject())
             } else {
-                print(error.localizedDescription)
+                self.createUserDelegate?.createUserFail(error)
             }
         }
     }
@@ -103,16 +104,15 @@ class ConnectionController {
         self.ref!.authUser(email, password: password,
                      withCompletionBlock: { (error, auth) in
                         if (error == nil) {
-                            self.authenticationDelegate?.userAuthenticated()
+                            self.authenticationDelegate?.userAuthenticatedSuccess()
                             let UID = auth.uid
                             let userRef = self.usersRef.childByAppendingPath(UID)
                             userRef.observeEventType(.Value, withBlock: { (snapshot: FDataSnapshot!) in
                                 self.user = User(snapshot: snapshot)
                                 print(self.user?.email)
                             })
-
                         } else {
-                            print(error.localizedDescription)
+                            self.authenticationDelegate?.userAuthenticatedFail(error)
                         }
         })
     }
