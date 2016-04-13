@@ -19,6 +19,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableView.dataSource = self
         self.connectionController.allPosts()
         self.connectionController.reloadPostsDelegate = self
+        self.navigationController?.toolbar.hidden = false
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -37,6 +38,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Mark: ReloadPostsDelegate
     func reloadModel() {
         self.posts = self.connectionController.posts
-        self.tableView.reloadData()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.reloadData()
+        }
     }
 }
