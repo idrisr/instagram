@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import Firebase 
 
 // functionality needed:
 
@@ -31,6 +31,11 @@ protocol SavePostDelegate {
     func savePost(post:Post)
 }
 
+protocol ReloadUserPostsDelegate {
+    func reloadCollectionView()
+}
+
+
 // TODO: handle post deletion
 
 class ConnectionController {
@@ -38,8 +43,10 @@ class ConnectionController {
     let postRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/posts")
     let userRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/users")
     var posts = [Post]()
+    var userPosts = [Post]()
 
     var reloadPostsDelegate: ReloadPostsDelegate?
+    var reloadUserPostsDelegate: ReloadUserPostsDelegate?
 
     static let sharedConnection = ConnectionController()
 
@@ -49,9 +56,12 @@ class ConnectionController {
                 let post = Post(snapshot: item as! FDataSnapshot)
                 if !self.posts.contains(post) {
                     self.posts.append(post)
+                    self.userPosts.append(post)
                 }
             }
             self.reloadPostsDelegate?.reloadModel()
+            self.reloadUserPostsDelegate?.reloadCollectionView()
+            
         })
     }
 
