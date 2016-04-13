@@ -19,6 +19,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableView.dataSource = self
         self.connectionController.allPosts()
         self.connectionController.reloadPostsDelegate = self
+        self.navigationController?.toolbar.hidden = false
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

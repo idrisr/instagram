@@ -34,10 +34,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IpG-BU-z8I" secondAttribute="bottom" id="T5P-3P-bQY"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IpG-BU-z8I" secondAttribute="bottom" id="T5P-3P-bQY">
+                                <variation key="widthClass=compact" constant="44"/>
+                            </constraint>
                             <constraint firstItem="IpG-BU-z8I" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Z4a-iS-uER"/>
                             <constraint firstAttribute="trailing" secondItem="IpG-BU-z8I" secondAttribute="trailing" id="vgM-3h-37V"/>
-                            <constraint firstItem="IpG-BU-z8I" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="w9O-Yj-0pw"/>
+                            <constraint firstItem="IpG-BU-z8I" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="w9O-Yj-0pw">
+                                <variation key="widthClass=compact" constant="-44"/>
+                            </constraint>
                         </constraints>
                     </view>
                     <toolbarItems>
@@ -50,13 +54,14 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="fz1-0z-9Iy"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="IpG-BU-z8I" id="0uJ-zc-NqS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2167" y="-125"/>
+            <point key="canvasLocation" x="2166" y="-125"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="uvM-Ka-K4S">
