@@ -22,22 +22,21 @@ class LoginViewController: UIViewController, AuthenticationDelegate {
         self.connectionController.authenticationDelegate = self
     }
 
-
     // MARK: IBActions
     @IBAction func onLoginButtonTapped(sender: AnyObject) {
         let email = emailTextField.text
         let password = passwordTextField.text
-        connectionController.authorizeUser(email, password: password)
+        connectionController.loginUser(email, password: password)
     }
 
     @IBAction func onSignupButtonTapped(sender: AnyObject) {
         let email = emailTextField.text
         let password = passwordTextField.text
-        connectionController.createFirebaseUserWithEmail(email, password: password)
+        connectionController.createUser(email, password: password, uid: "")
     }
 
     // MARK: AuthenticationDelegate
-    func didAuthenticate() {
+    func userAuthenticated() {
         performSegueWithIdentifier("segueToFeed", sender: nil)
     }
 }

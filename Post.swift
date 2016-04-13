@@ -21,10 +21,10 @@ struct Post:Equatable {
     var caption: String
     let ref: Firebase?
     var id: String?
-    // var user: User
+    var uid: String?
 
     static func image2String(image: UIImage) -> String {
-        let imageData = UIImageJPEGRepresentation(image, 0.5);
+        let imageData = UIImageJPEGRepresentation(image, 0.15);
         let imageString = imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
         return imageString
     }
@@ -41,13 +41,15 @@ struct Post:Equatable {
         self.caption = (snapshot.value["caption"] as! String?)!
         self.ref = snapshot.ref
         self.id = snapshot.key
+        self.uid = snapshot.value["uid"] as! String?
     }
 
     // init from device
-    init(image: UIImage) {
+    init(image: UIImage, user: User) {
         self.image = image
         self.caption = "to do"
         self.ref = nil
+        self.uid = user.uid
     }
 
     func description() -> String {
@@ -58,7 +60,8 @@ struct Post:Equatable {
         return [
             "image": Post.image2String(image),
             "comments": "",
-            "caption": caption
+            "caption": caption,
+            "uid": uid!
         ]
     }
 }

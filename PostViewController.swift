@@ -18,9 +18,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         imagePicker.delegate = self
-
     }
     
     func noCamera() {
@@ -32,18 +30,12 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         presentViewController(alertVC, animated: true, completion: nil)
     }
     
-
-    
     @IBAction func onImagePickerButtonTapped(sender: AnyObject) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .PhotoLibrary
-        
         presentViewController(imagePicker, animated: true, completion: nil)
-        
-        
     }
-    
-    
+
     @IBAction func onCameraButtonTapped(sender: AnyObject) {
         if UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil {
             imagePicker.allowsEditing = false
@@ -54,12 +46,10 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         } else {
             noCamera()
         }
-        
-        
     }
     
     @IBAction func onButtonPressed(sender: AnyObject) {
-        let post = Post(image: imageView.image!)
+        let post = Post(image: imageView.image!, user: self.connectionController.user!)
         connectionController.savePost(post)
         navigationController!.popViewControllerAnimated(true)
     }
@@ -69,16 +59,11 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.contentMode = .ScaleAspectFit
             imageView.image = pickedImage
-            
         }
-        
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
-        
     }
-    
-    
 }

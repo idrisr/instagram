@@ -36,13 +36,10 @@ protocol CreateUserDelegate {
 }
 
 protocol AuthenticationDelegate {
-    func didAuthenticate()
+    func userAuthenticated()
 }
 
 class ConnectionController {
-    let ref = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/")
-    let postRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/posts")
-    let userRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/users")
 
     var posts = [Post]()
 
@@ -50,10 +47,17 @@ class ConnectionController {
     var createUserDelegate: CreateUserDelegate?
     var authenticationDelegate: AuthenticationDelegate?
 
+    // private
+    var user: User?
+
+    let ref = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/")
+    let postsRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/posts")
+    let usersRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/users")
+
     static let sharedConnection = ConnectionController()
 
     func allPosts() {
-        postRef.observeEventType(.Value, withBlock: { snapshot in
+        postsRef.observeEventType(.Value, withBlock: { snapshot in
             for item in snapshot.children {
                 let post = Post(snapshot: item as! FDataSnapshot)
                 if !self.posts.contains(post) {
@@ -66,32 +70,39 @@ class ConnectionController {
     }
 
     func savePost(post: Post) {
-        let childRef = self.postRef.childByAutoId()
+        let childRef = self.postsRef.childByAutoId()
         childRef.setValue(post.toAnyObject())
     }
 
-    func createFirebaseUserWithEmail(email:String?, password:String?) {
-        // TODO guard against nils for email and password
-
-        // create firebase authentication user
-        self.ref!.createUser(email, password: password) { (error: NSError!) in
+    func createUser(email:String?, password:String?, uid: String) {
+        self.ref!.createUser(email, password: password) { (error: NSError!, results: [NSObject : AnyObject]!) in
             if error == nil {
-                self.authorizeUser(email, password: password)
+                self.loginUser(email, password: password)
+                let uid = results["uid"] as! String
+                let childRef = self.usersRef.childByAppendingPath(uid)
+                self.user = User(email: email!, uid: uid, ref: childRef)
+                childRef.setValue(self.user!.toAnyObject())
             } else {
                 print(error.localizedDescription)
             }
         }
-
-        // create user object
-        let user = User(email: email!)
-        let childRef = self.userRef.childByAutoId()
-        childRef.setValue(user.toAnyObject())
     }
 
-    func authorizeUser(email: String?, password: String?) {
+    func loginUser(email: String?, password: String?) {
         self.ref!.authUser(email, password: password,
                      withCompletionBlock: { (error, auth) in
-                        self.authenticationDelegate?.didAuthenticate()
+                        if (error == nil) {
+                            self.authenticationDelegate?.userAuthenticated()
+                            let UID = auth.uid
+                            let userRef = self.usersRef.childByAppendingPath(UID)
+                            userRef.observeEventType(.Value, withBlock: { (snapshot: FDataSnapshot!) in
+                                self.user = User(snapshot: snapshot)
+                                print(self.user?.email)
+                            })
+
+                        } else {
+                            print(error.localizedDescription)
+                        }
         })
     }
 }

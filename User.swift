@@ -10,29 +10,30 @@ import UIKit
 import Firebase
 
 struct User {
-    var name: String
-    var username: String
+    var name: String?
+    var username: String?
     var email: String
     let ref: Firebase?
-    var id: String?
-
-//    // init from firebase
-//    init(snapshot: FDataSnapshot) {
-//    }
+    var uid: String
 
     // init from device
-    init(email: String) {
+    init(email: String, uid:String, ref: Firebase) {
         self.email = email
+        self.uid = uid
         self.name = ""
         self.username = ""
-        self.ref = nil
+        self.ref = ref
+    }
+
+    // init from firebase
+    init(snapshot: FDataSnapshot) {
+        self.name = snapshot.value["name"] as! String?
+        self.email = snapshot.value["email"] as! String
+        self.ref = snapshot.ref
+        self.uid = snapshot.key
     }
 
     func toAnyObject() -> AnyObject {
-        return [
-            "name": name,
-            "username": username,
-            "email": email
-        ]
+        return [ "name": name!, "username": username!, "email": email ]
     }
 }
