@@ -14,14 +14,17 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var profileImage: UIImageView!
     var userPosts = [Post]()
     let connectionController = ConnectionController.sharedConnection
+    var user: User!
 
     @IBOutlet weak var numberOfPhotosLabel: UILabel!
     @IBOutlet weak var numberOfFollowersLabel: UILabel!
     @IBOutlet weak var numberOfUsersFollowingLabel: UILabel!
     @IBOutlet weak var bioDescriptionLabel: UILabel!
+    @IBOutlet weak var usernameLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -87,6 +90,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
-
-
+    func userProfileInfo(user:User) {
+        self.user = user
+        usernameLbl.text = user.email
+    }
 }

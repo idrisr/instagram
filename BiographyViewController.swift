@@ -18,10 +18,15 @@ class BiographyViewController: UIViewController, UITextViewDelegate  {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var counterLbl: UILabel!
     var delegate: AddBiographyControllerDelegate?
+    var maxCharacters = 76
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateButton.layer.cornerRadius = 5.0
+        counterLbl.text = "75"
+        textView.delegate = self
+        
     }
     
     @IBAction func updateButtonPressed(sender: UIButton) {
@@ -33,7 +38,8 @@ class BiographyViewController: UIViewController, UITextViewDelegate  {
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-    
-        return textView.text.characters.count + (text.characters.count - range.length) <= 70
+        let textLength = (textView.text.characters.count + (text.characters.count - range.length))
+        counterLbl.text = "\(maxCharacters - textLength)"
+        return textLength <= 75
     }
 }
