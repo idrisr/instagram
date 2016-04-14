@@ -60,7 +60,7 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func onButtonPressed(sender: AnyObject) {
         let post = Post(image: imageView.image!, caption: captionTextField.text!, user: self.connectionController.user!)
         connectionController.savePost(post)
-        navigationController!.popViewControllerAnimated(true)
+        self.tabBarController?.selectedIndex = 0
     }
     
     // MARK: - UIImagePickerControllerDelegate Methods
