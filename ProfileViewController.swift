@@ -43,9 +43,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         borderStyleForOutlets()
         userProfileInfo()
         checkIfUserPost()
+        checkUserBlogPost()
         
         numberOfPhotosLabel.text = "\(self.checkedPostArray.count)\nPhotos"
-        bioDescriptionLabel.text = defaults.stringForKey("blog")
         
     }
     
@@ -116,5 +116,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     func userProfileInfo() {
        usernameLbl.text = self.profileUser!.username
     }
+    
+    func checkUserBlogPost() {
+        
+        if defaults.objectForKey("blog") != nil {
+            bioDescriptionLabel.text = defaults.stringForKey("blog")
+        } else {
+            bioDescriptionLabel.text = "Enter bio about yourself here"
+        }
+    }
+    
+    
 }
 
