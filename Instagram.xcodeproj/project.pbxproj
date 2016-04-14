@@ -12,6 +12,7 @@
 		2520F6191CBDA17B005B6699 /* BiographyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2520F6181CBDA17B005B6699 /* BiographyViewController.swift */; };
 		25A747D21CBEA9A800C66D63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B958721CBBD7E700B017E4 /* AppDelegate.swift */; };
 		28AAD323A3F7780D5C8A98EA /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C7D716A03737AC71A960EC /* Pods_Instagram.framework */; };
+		6858E4AA1CC0192100377A03 /* peach-sundress.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6858E4A91CC018BE00377A03 /* peach-sundress.ttf */; };
 		689AEF981CBD49E9008C7AEA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689AEF971CBD49E9008C7AEA /* LoginViewController.swift */; };
 		689AEF9E1CBD4AE9008C7AEA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689AEF9D1CBD4AE9008C7AEA /* User.swift */; };
 		68B958751CBBD7E700B017E4 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B958741CBBD7E700B017E4 /* TimelineViewController.swift */; };
@@ -34,6 +35,7 @@
 		2520F6181CBDA17B005B6699 /* BiographyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiographyViewController.swift; sourceTree = "<group>"; };
 		46433EB0BE8502CD693D11D9 /* Pods-Instagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram/Pods-Instagram.release.xcconfig"; sourceTree = "<group>"; };
 		53C7D716A03737AC71A960EC /* Pods_Instagram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6858E4A91CC018BE00377A03 /* peach-sundress.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "peach-sundress.ttf"; sourceTree = "<group>"; };
 		689AEF971CBD49E9008C7AEA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		689AEF9D1CBD4AE9008C7AEA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		68B9586F1CBBD7E700B017E4 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +111,7 @@
 		68B958711CBBD7E700B017E4 /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				6858E4A91CC018BE00377A03 /* peach-sundress.ttf */,
 				68B958721CBBD7E700B017E4 /* AppDelegate.swift */,
 				68B958791CBBD7E700B017E4 /* Assets.xcassets */,
 				68B9587E1CBBD7E700B017E4 /* Info.plist */,
@@ -217,6 +220,7 @@
 				68B9587D1CBBD7E700B017E4 /* LaunchScreen.storyboard in Resources */,
 				68B9587A1CBBD7E700B017E4 /* Assets.xcassets in Resources */,
 				E29E96531CBEF01200BBC8FA /* Main.storyboard in Resources */,
+				6858E4AA1CC0192100377A03 /* peach-sundress.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

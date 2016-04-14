@@ -15,11 +15,17 @@ class LoginViewController: UIViewController, AuthenticationDelegate  {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var signupButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.passwordTextField.secureTextEntry = true
         self.connectionController.authenticationDelegate = self
+        self.loginButton.layer.cornerRadius = 5.0
+        self.signupButton.layer.cornerRadius = 5.0
+        self.emailTextField.layer.cornerRadius = 5.0
+        self.passwordTextField.layer.cornerRadius = 5.0
     }
 
     // MARK: IBActions
