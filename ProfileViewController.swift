@@ -23,6 +23,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var bioDescriptionLabel: UILabel!
     @IBOutlet weak var usernameLbl: UILabel!
     
+//    126,207,175  - Blue  RGB
+//    59,32,32 - Brown  RGB
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,13 +33,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
 
         collectionView.dataSource = self
         collectionView.delegate = self
-        self.connectionController.allPosts()
+        
+        self.connectionController.userPost()
         self.connectionController.reloadUserPostsDelegate = self
+        
         reloadCollectionView()
-        numberOfPhotosLabel.text = "\(self.userPosts.count)\nPhotos"
+        
         borderStyleForOutlets()
         userProfileInfo()
         
+        numberOfPhotosLabel.text = "\(self.userPosts.count)\nPhotos"
         bioDescriptionLabel.text = defaults.stringForKey("blog")
         
     }
@@ -46,7 +52,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func reloadCollectionView() {
-        self.userPosts = self.connectionController.posts
+        self.userPosts = self.connectionController.userPosts
         self.collectionView.reloadData()
     }
     
@@ -96,7 +102,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func userProfileInfo() {
-        usernameLbl.text = self.profileUser!.email
+        if usernameLbl.text == "" {
+            usernameLbl.text = "Anonymous"
+        } else {
+        usernameLbl.text = self.profileUser!.username
+        }
     }
 }
 

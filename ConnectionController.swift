@@ -70,11 +70,26 @@ class ConnectionController {
                 let post = Post(snapshot: item as! FDataSnapshot)
                 if !self.posts.contains(post) {
                     self.posts.append(post)
-                    self.userPosts.append(post)
+//                    self.userPosts.append(post)
                 }
             }
             self.posts = self.posts.reverse()
             self.reloadPostsDelegate?.reloadModel()
+//            self.reloadUserPostsDelegate?.reloadCollectionView()
+        })
+    }
+    
+    func userPost() {
+        postsRef.observeEventType(.Value, withBlock: { snapshot in
+            for item in snapshot.children {
+                let post = Post(snapshot: item as! FDataSnapshot)
+                let user = User(snapshot: item as! FDataSnapshot)
+                if !self.userPosts.contains(post) {
+                    if user.uid == post.uid {
+                    self.userPosts.append(post)
+                    }
+                }
+            }
             self.reloadUserPostsDelegate?.reloadCollectionView()
         })
     }
