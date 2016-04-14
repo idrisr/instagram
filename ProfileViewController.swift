@@ -23,10 +23,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var numberOfUsersFollowingLabel: UILabel!
     @IBOutlet weak var bioDescriptionLabel: UILabel!
     @IBOutlet weak var usernameLbl: UILabel!
+    @IBOutlet weak var followButton: UIButton!
     
 //    126,207,175  - Blue  RGB
 //    59,32,32 - Brown  RGB
     
+    @IBAction func onToggleFollowButtonPressed(sender: AnyObject) {
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBarHidden = false

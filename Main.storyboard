@@ -454,6 +454,14 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9oh-gJ-4DH">
+                                <rect key="frame" x="200" y="100" width="133" height="82"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Follow"/>
+                                <connections>
+                                    <action selector="onToggleFollowButtonPressed:" destination="Uez-9s-8hX" eventType="touchUpInside" id="tbT-RX-YXf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -481,6 +489,7 @@
                     <connections>
                         <outlet property="bioDescriptionLabel" destination="cCP-ly-9aD" id="vzc-aU-iG0"/>
                         <outlet property="collectionView" destination="kt7-jJ-f0F" id="mC6-wP-gkc"/>
+                        <outlet property="followButton" destination="9oh-gJ-4DH" id="lyE-2h-rsn"/>
                         <outlet property="numberOfFollowersLabel" destination="gck-eq-ubA" id="5Wr-Nc-TUs"/>
                         <outlet property="numberOfPhotosLabel" destination="1i0-Qy-E6C" id="s7p-Uk-Ixe"/>
                         <outlet property="numberOfUsersFollowingLabel" destination="kHY-cE-1RB" id="1Gw-k3-vQx"/>
