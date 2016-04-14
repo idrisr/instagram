@@ -17,10 +17,13 @@ protocol TableViewCellDelegate {
 
 class FeedTableViewCell: UITableViewCell {
 
+    var delegate: TableViewCellDelegate?
+    
     @IBOutlet weak var cellImageView: UIImageView!
     @IBOutlet weak var cellCaptionLabel: UILabel!
     @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var userIDButton: UIButton!
     
     @IBAction func onUserIDTapped(sender: AnyObject) {
     }

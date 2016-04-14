@@ -34,7 +34,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="tabBar_search" id="YvM-LK-rax">
-                        <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
+                        <inset key="imageInsets" minX="3" minY="10" maxX="3" maxY="-5"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="searchDisplayController" destination="OXm-gi-ev4" id="syS-Fv-P10"/>
@@ -70,7 +70,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postCell" rowHeight="484" id="nq3-fl-p29" customClass="FeedTableViewCell" customModule="Instagram" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="484"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="484"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nq3-fl-p29" id="adM-od-xDM">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="483.5"/>
@@ -134,6 +134,7 @@
                                             <outlet property="cellCaptionLabel" destination="ANg-Cu-3lP" id="Ls8-em-206"/>
                                             <outlet property="cellImageView" destination="CFD-d6-gsu" id="ejh-iy-pUO"/>
                                             <outlet property="commentTextField" destination="lgi-dR-EZU" id="y32-g4-vyS"/>
+                                            <outlet property="userIDButton" destination="sMV-hT-jTW" id="MGu-QM-hod"/>
                                             <outlet property="userProfileImageView" destination="Eyb-0n-vCi" id="2Bc-Cs-Jom"/>
                                         </connections>
                                     </tableViewCell>
@@ -148,10 +149,8 @@
                             <constraint firstAttribute="trailing" secondItem="IpG-BU-z8I" secondAttribute="trailing" id="lJ1-G7-7zO"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="tabBar_home" id="2Eh-OB-X5o">
-                        <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
-                    </tabBarItem>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="aq0-ec-run"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="IpG-BU-z8I" id="0uJ-zc-NqS"/>
@@ -159,7 +158,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2642" y="-395"/>
+            <point key="canvasLocation" x="3634" y="-395"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hbJ-66-ylA">
@@ -177,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A9u-jM-gle" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3491" y="-875"/>
+            <point key="canvasLocation" x="4407" y="-875"/>
         </scene>
         <!--Comment View Controller-->
         <scene sceneID="AoU-pR-cVQ">
@@ -196,7 +195,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentCell" id="eZ6-bE-57Y">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eZ6-bE-57Y" id="CoY-GE-Ehb">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -231,7 +230,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b5l-KJ-q47" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3491" y="-145"/>
+            <point key="canvasLocation" x="4513" y="-89"/>
         </scene>
         <!--New Post View Controller-->
         <scene sceneID="uvM-Ka-K4S">
@@ -327,7 +326,7 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="tabBar_camera" id="O1N-DV-l7I">
-                        <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
+                        <inset key="imageInsets" minX="3" minY="10" maxX="3" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <connections>
@@ -487,7 +486,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="tabBar_profile" id="OhV-Yf-4al">
-                        <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
+                        <inset key="imageInsets" minX="3" minY="10" maxX="3" maxY="-5"/>
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-20"/>
                     </tabBarItem>
                     <connections>
@@ -598,41 +597,51 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sp1-TB-K52">
-                                <rect key="frame" x="168" y="163" width="265" height="274"/>
+                                <rect key="frame" x="110" y="98" width="380" height="404"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24V-lb-YjY">
-                                        <rect key="frame" x="20" y="159" width="225" height="30"/>
-                                        <state key="normal" title="Login"/>
+                                        <rect key="frame" x="78" y="224" width="225" height="30"/>
+                                        <color key="backgroundColor" red="0.4941176471" green="0.81176470590000005" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
                                             <action selector="onLoginButtonTapped:" destination="LLp-qf-gsh" eventType="touchUpInside" id="SFl-l0-csh"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfz-MP-4ia">
-                                        <rect key="frame" x="20" y="93" width="225" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfz-MP-4ia">
+                                        <rect key="frame" x="78" y="148" width="225" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p7n-xY-Ube">
-                                        <rect key="frame" x="20" y="20" width="225" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p7n-xY-Ube">
+                                        <rect key="frame" x="78" y="75" width="225" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEE-xA-U7M">
-                                        <rect key="frame" x="20" y="224" width="225" height="30"/>
-                                        <state key="normal" title="Signup"/>
+                                        <rect key="frame" x="78" y="289" width="225" height="30"/>
+                                        <color key="backgroundColor" red="0.4941176471" green="0.81176470590000005" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Signup">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
                                             <segue destination="u7B-Vg-TFt" kind="presentation" identifier="SignupSegue" id="94e-R8-SgD"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.23137254900000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="265" id="EEw-qo-uqd"/>
-                                    <constraint firstAttribute="height" constant="274" id="Jpc-yl-SaU"/>
+                                    <constraint firstAttribute="width" constant="380" id="EEw-qo-uqd"/>
+                                    <constraint firstAttribute="height" constant="404" id="Jpc-yl-SaU"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.23137254901960785" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="sp1-TB-K52" firstAttribute="centerX" secondItem="QfH-k3-KT2" secondAttribute="centerX" id="q6G-ZP-bJL"/>
                             <constraint firstItem="sp1-TB-K52" firstAttribute="centerY" secondItem="QfH-k3-KT2" secondAttribute="centerY" id="t8E-BX-Sx4"/>
@@ -721,7 +730,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="aFG-zu-uU1"/>
+                        <segue destination="lTH-tX-rXb" kind="relationship" relationship="viewControllers" id="aFG-zu-uU1"/>
                         <segue destination="yCs-SU-HTH" kind="relationship" relationship="viewControllers" id="2D6-mK-bZl"/>
                         <segue destination="Uez-9s-8hX" kind="relationship" relationship="viewControllers" id="jrY-ch-8Xp"/>
                         <segue destination="8rT-EV-1XM" kind="relationship" relationship="viewControllers" id="lMm-ly-Lbs"/>
@@ -730,6 +739,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QMw-Y2-K2t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1802" y="-395"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FEN-Qt-d6V">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lTH-tX-rXb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="tabBar_home" id="2Eh-OB-X5o">
+                        <inset key="imageInsets" minX="3" minY="10" maxX="3" maxY="-5"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tb9-wY-gT6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="rxo-00-mBl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h1p-dB-Dvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2822" y="-395"/>
         </scene>
     </scenes>
     <resources>
@@ -740,6 +770,6 @@
         <image name="tabBar_search" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EDt-Gg-8Ka"/>
+        <segue reference="YbN-ag-jWg"/>
     </inferredMetricsTieBreakers>
 </document>

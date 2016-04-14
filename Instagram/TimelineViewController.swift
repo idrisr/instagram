@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReloadPostsDelegate {
+class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReloadPostsDelegate, TableViewCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     let connectionController = ConnectionController.sharedConnection
     var posts = [Post]()
@@ -33,8 +33,7 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         
         cell.cellImageView.image = post.image
         cell.cellCaptionLabel.text = post.caption
-//        cell.textLabel!.text = post.caption
-//        cell.imageView!.image = post.image
+        cell.delegate = self
         return cell
     }
 
@@ -44,5 +43,17 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         dispatch_async(dispatch_get_main_queue()) {
             self.tableView.reloadData()
         }
+    }
+    
+    func userIDTapped(userName: String) {
+        
+    }
+    
+    func commentFieldTapped(userName: String) {
+        
+    }
+    
+    func likeButtonTapped(postID: String) {
+        
     }
 }
