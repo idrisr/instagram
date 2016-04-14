@@ -47,10 +47,10 @@ class SignupViewController: UIViewController, UserCreationDelegate, Authenticati
         self.presentViewController(alert, animated: true, completion: nil)
     }
 
-    // MARK: UserCreationDelegate
+    // MARK: AuthenticationDelegate
     func userAuthenticatedSuccess() {
-        self.dismissViewControllerAnimated(true) {
-            self.presentingViewController?.performSegueWithIdentifier("segueToFeed", sender: nil)
+        dispatch_async(dispatch_get_main_queue()) { 
+            self.performSegueWithIdentifier("signupToFeedSegue", sender: nil)
         }
     }
 
