@@ -30,7 +30,11 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         let reuseID = "postCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseID, forIndexPath: indexPath) as! FeedTableViewCell
         let post = self.posts[indexPath.row]
-        
+
+        let uid = post.uid!
+        let user = connectionController.getUserForUID(uid)
+        print(user!.username!)
+        cell.userIDButton.titleLabel?.text = user?.username
         cell.cellImageView.image = post.image
         cell.cellCaptionLabel.text = post.caption
         cell.delegate = self

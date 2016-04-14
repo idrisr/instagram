@@ -44,6 +44,11 @@ protocol AuthenticationDelegate {
     func userAuthenticatedFail(error: NSError)
 }
 
+// protocol to tell controllers that users array changed
+protocol UserChangedDelegate {
+
+}
+
 class ConnectionController {
 
     var posts = [Post]()
@@ -59,11 +64,32 @@ class ConnectionController {
     let usersRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/users")
 
     static let sharedConnection = ConnectionController()
+    private var users = [User]()
 
-//    init() {
-//        setupListeners()
-//    }
+    init() {
+        allUsers()
+        setupListeners()
+    }
 
+    func getUserForUID(uid: String) -> User? {
+        // guard instead?
+        if let index = self.users.indexOf({$0.uid == uid}) {
+            return self.users[index]
+        } else {
+            return nil
+        }
+    }
+
+    private func allUsers() {
+        usersRef.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
+            for item in snapshot.children {
+                let user = User(snapshot: item as! FDataSnapshot)
+                self.users.append(user)
+            }
+        }
+    }
+
+    // change to listener model and privatize
     func allPosts() {
         postsRef.observeEventType(.Value, withBlock: { snapshot in
             for item in snapshot.children {
@@ -126,6 +152,30 @@ class ConnectionController {
 
     private func setupListeners() {
         // post listening
+        self.usersRef.observeEventType(.ChildAdded) { (snapshot: FDataSnapshot!) in
+            // add child to array
+            let user = User(snapshot: snapshot)
+            self.users.append(user)
+            // call delegate telling it something changed
+        }
+
+        self.usersRef.observeEventType(.ChildChanged) { (snapshot: FDataSnapshot!) in
+            // change child in array;
+            let user = User(snapshot: snapshot)
+            let index = self.users.indexOf(user)!
+            self.users[index] = user
+            // call delegate telling it something changed
+        }
+
+        self.usersRef.observeEventType(.ChildRemoved) { (snapshot: FDataSnapshot!) in
+            // remove child from array
+            let user = User(snapshot: snapshot)
+            let index = self.users.indexOf(user)!
+            self.users.removeAtIndex(index)
+            // call delegate telling it something changed
+        }
+
+        // post listening
         self.postsRef.observeEventType(.ChildAdded) { (snapshot: FDataSnapshot!) in
 
         }
@@ -135,19 +185,6 @@ class ConnectionController {
         }
 
         self.postsRef.observeEventType(.ChildRemoved) { (snapshot: FDataSnapshot!) in
-
-        }
-
-        // user listening
-        self.usersRef.observeEventType(.ChildAdded) { (snapshot: FDataSnapshot!) in
-
-        }
-
-        self.usersRef.observeEventType(.ChildChanged) { (snapshot: FDataSnapshot!) in
-
-        }
-
-        self.usersRef.observeEventType(.ChildRemoved) { (snapshot: FDataSnapshot!) in
 
         }
     }

@@ -9,7 +9,12 @@
 import UIKit
 import Firebase
 
-struct User {
+// Implement Equatable
+func ==(lhs:User, rhs:User) -> Bool { // Implement Equatable
+    return lhs.uid == rhs.uid
+}
+
+struct User:Equatable {
     var name: String?
     var username: String?
     var email: String
@@ -35,7 +40,7 @@ struct User {
     init(snapshot: FDataSnapshot) {
         self.name = snapshot.value["name"] as! String?
         self.email = snapshot.value["email"] as! String
-        self.username = ""
+        self.username = snapshot.value["username"] as! String
         self.ref = snapshot.ref
         self.uid = snapshot.key
 
@@ -70,7 +75,6 @@ struct User {
     }
 
     func toAnyObject() -> AnyObject {
-
         return [ 
             "name"          : name!,
              "username"     : username!,
