@@ -17,10 +17,14 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.navigationController?.navigationBarHidden = true
         self.connectionController.allPosts()
         self.connectionController.reloadPostsDelegate = self
         self.navigationController?.toolbar.hidden = false
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBarHidden = true
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

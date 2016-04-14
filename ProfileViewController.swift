@@ -29,7 +29,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBarHidden = false
+
         profileUser = connectionController.user
 
         collectionView.dataSource = self
