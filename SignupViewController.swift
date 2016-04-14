@@ -8,38 +8,54 @@
 
 import UIKit
 
-class SignupViewController: UIViewController {
+class SignupViewController: UIViewController, UserCreationDelegate, AuthenticationDelegate {
 
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    
-    @IBAction func onSignupTapped(sender: AnyObject) {
-    }
-    
-    
-    
+    let connectionController = ConnectionController.sharedConnection
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.connectionController.createUserDelegate = self
+        self.connectionController.authenticationDelegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func onSignupTapped(sender: AnyObject) {
+        let userName = userNameTextField.text
+        let email = emailTextField.text
+        let password = passwordTextField.text
+        connectionController.createUser(email, password: password, userName: userName!)
     }
-    
 
-    /*
-    // MARK: - Navigation
+    // MARK: UserCreationDelegate
+    func createUserFail(error: NSError) {
+        var message: String
+        switch error.code {
+        case -5:
+            message = "Invalid email address"
+        case -9:
+            message = "The specified email address is already in use"
+        default:
+            message =  "error creating user"
+        }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let alert = UIAlertController(title: "Login Error", message: message, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
-    */
 
+    // MARK: UserCreationDelegate
+    func userAuthenticatedSuccess() {
+        self.dismissViewControllerAnimated(true) {
+            self.presentingViewController?.performSegueWithIdentifier("segueToFeed", sender: nil)
+        }
+    }
+
+    func userAuthenticatedFail(error:NSError) {
+        // shouldnt be here. optional protocol function in Swift?
+        print(error.localizedDescription + "\(error.code)")
+    }
 }
