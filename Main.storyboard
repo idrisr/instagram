@@ -71,7 +71,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="484"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nq3-fl-p29" id="adM-od-xDM">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="483.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="484"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caption Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANg-Cu-3lP">
@@ -87,17 +87,17 @@
                                                         <action selector="onUserIDTapped:" destination="nq3-fl-p29" eventType="touchUpInside" id="rzt-ws-CL0"/>
                                                     </connections>
                                                 </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eyb-0n-vCi">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eyb-0n-vCi">
                                                     <rect key="frame" x="22" y="5" width="54" height="36"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5x-ef-ytI">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5x-ef-ytI">
                                                     <rect key="frame" x="22" y="321" width="78" height="30"/>
                                                     <state key="normal" title="Like Button"/>
                                                     <connections>
                                                         <action selector="onLikeButtonTapped:" destination="nq3-fl-p29" eventType="touchUpInside" id="3ny-J1-NaW"/>
                                                     </connections>
                                                 </button>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Displays comments" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lgi-dR-EZU">
+                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Displays comments" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lgi-dR-EZU">
                                                     <rect key="frame" x="22" y="359" width="570" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -116,9 +116,15 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="CFD-d6-gsu" firstAttribute="top" secondItem="adM-od-xDM" secondAttribute="topMargin" constant="76" id="DBP-1Y-OGT"/>
+                                                <constraint firstItem="lgi-dR-EZU" firstAttribute="leading" secondItem="o5x-ef-ytI" secondAttribute="leading" id="Qvs-Lz-asq"/>
+                                                <constraint firstItem="lgi-dR-EZU" firstAttribute="trailing" secondItem="adM-od-xDM" secondAttribute="trailingMargin" id="X9g-27-4Vt"/>
                                                 <constraint firstItem="CFD-d6-gsu" firstAttribute="centerX" secondItem="adM-od-xDM" secondAttribute="centerX" id="Xcb-jJ-EF8"/>
+                                                <constraint firstItem="lgi-dR-EZU" firstAttribute="leading" secondItem="Eyb-0n-vCi" secondAttribute="leading" id="Zso-aF-XMG"/>
                                                 <constraint firstItem="CFD-d6-gsu" firstAttribute="centerX" secondItem="ANg-Cu-3lP" secondAttribute="centerX" id="a3f-hF-2Qd"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="lgi-dR-EZU" secondAttribute="bottom" constant="86.5" id="bLB-AY-DO0"/>
+                                                <constraint firstItem="lgi-dR-EZU" firstAttribute="leading" secondItem="adM-od-xDM" secondAttribute="leadingMargin" constant="14" id="d8i-91-RWs"/>
                                                 <constraint firstItem="ANg-Cu-3lP" firstAttribute="top" secondItem="CFD-d6-gsu" secondAttribute="bottom" constant="8" symbolic="YES" id="jPU-1h-A5F"/>
+                                                <constraint firstItem="lgi-dR-EZU" firstAttribute="top" secondItem="o5x-ef-ytI" secondAttribute="bottom" constant="8" symbolic="YES" id="yi1-EU-j64"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
