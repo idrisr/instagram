@@ -35,7 +35,7 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         let uid = post.uid!
         let user = connectionController.getUserForUID(uid)
         print(user!.username!)
-        cell.userIDButton.titleLabel?.text = user?.username
+        cell.userIDButton.setTitle(user?.username!, forState: .Normal)
         cell.cellImageView.image = post.image
         cell.cellCaptionLabel.text = post.caption
         cell.delegate = self
