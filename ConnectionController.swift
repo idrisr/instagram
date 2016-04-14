@@ -46,7 +46,7 @@ protocol AuthenticationDelegate {
 
 // protocol to tell controllers that users array changed
 protocol UserChangedDelegate {
-
+    func userChangedSuccess()
 }
 
 class ConnectionController {
@@ -57,6 +57,7 @@ class ConnectionController {
     var reloadUserPostsDelegate: ReloadUserPostsDelegate?
     var createUserDelegate: UserCreationDelegate?
     var authenticationDelegate: AuthenticationDelegate?
+    var userChangedDelegate: UserChangedDelegate?
     var user: User?
 
     let ref = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/")
@@ -69,6 +70,10 @@ class ConnectionController {
     init() {
         allUsers()
         setupListeners()
+    }
+
+    func getAllUsers() -> [User] {
+        return self.users
     }
 
     func getUserForUID(uid: String) -> User? {
@@ -114,6 +119,17 @@ class ConnectionController {
                 self.user?.addPost(ref.key)
                 let userRef = self.usersRef.childByAppendingPath(self.user?.uid)
                 userRef.setValue(self.user?.toAnyObject())
+            } else {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    func saveUser(user: User) {
+        let userRef = self.usersRef.childByAppendingPath(user.uid)
+
+        userRef.setValue(user.toAnyObject()) { (error: NSError!, ref: Firebase!) in
+            if error == nil {
             } else {
                 print(error.localizedDescription)
             }

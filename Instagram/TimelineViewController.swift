@@ -53,16 +53,17 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
             self.tableView.reloadData()
         }
     }
-    
-    func userIDTapped(userName: String) {
-        
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let cell = sender as! FeedTableViewCell
+        let indexPath = self.tableView.indexPathForCell(cell)
+        let post = self.posts[indexPath!.row]
+        let user = self.connectionController.getUserForUID(post.uid!)
+        let destinvationVC = segue.destinationViewController as! ProfileViewController
+        destinvationVC.profileUser = user
     }
     
-    func commentFieldTapped(userName: String) {
-        
-    }
-    
-    func likeButtonTapped(postID: String) {
-        
-    }
+    func userIDTapped(userName: String) { }
+    func commentFieldTapped(userName: String) { }
+    func likeButtonTapped(postID: String) { }
 }
