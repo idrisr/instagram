@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TimelineViewController.swift
 //  Instagram
 //
 //  Created by id on 4/11/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReloadPostsDelegate {
+class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReloadPostsDelegate {
     @IBOutlet weak var tableView: UITableView!
     let connectionController = ConnectionController.sharedConnection
     var posts = [Post]()

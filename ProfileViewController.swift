@@ -39,7 +39,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     func reloadCollectionView() {
         self.userPosts = self.connectionController.posts
         self.collectionView.reloadData()
-        print(userPosts)
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -86,7 +85,4 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             destination.delegate = self
         }
     }
-    
-
-
 }
