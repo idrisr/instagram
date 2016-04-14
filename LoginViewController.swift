@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class LoginViewController: UIViewController, AuthenticationDelegate, UserCreationDelegate {
+class LoginViewController: UIViewController, AuthenticationDelegate  {
 
     let connectionController = ConnectionController.sharedConnection
 
@@ -20,7 +20,6 @@ class LoginViewController: UIViewController, AuthenticationDelegate, UserCreatio
         super.viewDidLoad()
         self.passwordTextField.secureTextEntry = true
         self.connectionController.authenticationDelegate = self
-        self.connectionController.createUserDelegate = self
     }
 
     // MARK: IBActions
@@ -30,24 +29,21 @@ class LoginViewController: UIViewController, AuthenticationDelegate, UserCreatio
         connectionController.loginUser(email, password: password)
     }
 
-    @IBAction func onSignupButtonTapped(sender: AnyObject) {
-        let email = emailTextField.text
-        let password = passwordTextField.text
-        connectionController.createUser(email, password: password, uid: "")
-    }
-
     // MARK: AuthenticationDelegate
     func userAuthenticatedSuccess() {
         performSegueWithIdentifier("segueToFeed", sender: nil)
     }
 
     func userAuthenticatedFail(error:NSError) {
+        print(error.localizedDescription + "\(error.code)")
         var message: String
         switch error.code {
         case -5:
             message = "Invalid email address"
         case -6:
             message = "Incorrect Password"
+        case -8:
+            message = "No account for that email address"
         default:
             message =  "error logging in"
         }
@@ -58,20 +54,4 @@ class LoginViewController: UIViewController, AuthenticationDelegate, UserCreatio
         self.presentViewController(alert, animated: true, completion: nil)
     }
 
-    func createUserFail(error: NSError) {
-        var message: String
-        switch error.code {
-        case -5:
-            message = "Invalid email address"
-        case -9:
-            message = "The specified email address is already in use"
-        default:
-            message =  "error creating user"
-        }
-
-        let alert = UIAlertController(title: "Login Error", message: message, preferredStyle: .Alert)
-        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
-        alert.addAction(action)
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
 }

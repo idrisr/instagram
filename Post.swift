@@ -16,8 +16,8 @@ func ==(lhs:Post, rhs:Post) -> Bool { // Implement Equatable
 
 struct Post:Equatable {
     var image: UIImage
-//    var comments = [String]()
-    var likes = 0
+    var comments = [String]()
+    var likes : [String]
     var caption: String
     let ref: Firebase?
     var id: String?
@@ -42,6 +42,7 @@ struct Post:Equatable {
         self.ref = snapshot.ref
         self.id = snapshot.key
         self.uid = snapshot.value["uid"] as! String?
+        self.likes = []
     }
 
     // init from device
@@ -50,6 +51,7 @@ struct Post:Equatable {
         self.caption = caption
         self.ref = nil
         self.uid = user.uid
+        self.likes = []
     }
 
     func description() -> String {

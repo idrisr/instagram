@@ -35,8 +35,6 @@ protocol ReloadUserPostsDelegate {
     func reloadCollectionView()
 }
 
-
-// TODO: handle post deletion
 protocol UserCreationDelegate {
     func createUserFail(error: NSError)
 }
@@ -50,13 +48,10 @@ class ConnectionController {
 
     var posts = [Post]()
     var userPosts = [Post]()
-
     var reloadPostsDelegate: ReloadPostsDelegate?
     var reloadUserPostsDelegate: ReloadUserPostsDelegate?
     var createUserDelegate: UserCreationDelegate?
     var authenticationDelegate: AuthenticationDelegate?
-
-    // private
     var user: User?
 
     let ref = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/")
@@ -81,7 +76,6 @@ class ConnectionController {
             self.posts = self.posts.reverse()
             self.reloadPostsDelegate?.reloadModel()
             self.reloadUserPostsDelegate?.reloadCollectionView()
-            
         })
     }
 
@@ -100,13 +94,13 @@ class ConnectionController {
         }
     }
 
-    func createUser(email:String?, password:String?, uid: String) {
+    func createUser(email:String?, password:String?, userName: String) {
         self.ref!.createUser(email, password: password) { (error: NSError!, results: [NSObject : AnyObject]!) in
             if error == nil {
                 self.loginUser(email, password: password)
                 let uid = results["uid"] as! String
                 let childRef = self.usersRef.childByAppendingPath(uid)
-                self.user = User(email: email!, uid: uid, ref: childRef)
+                self.user = User(email: email!, uid: uid, userName: userName, ref: childRef)
                 childRef.setValue(self.user!.toAnyObject())
             } else {
                 self.createUserDelegate?.createUserFail(error)
@@ -123,11 +117,38 @@ class ConnectionController {
                             let userRef = self.usersRef.childByAppendingPath(UID)
                             userRef.observeEventType(.Value, withBlock: { (snapshot: FDataSnapshot!) in
                                 self.user = User(snapshot: snapshot)
-                                print(self.user?.email)
                             })
                         } else {
                             self.authenticationDelegate?.userAuthenticatedFail(error)
                         }
         })
+    }
+
+    private func setupListeners() {
+        // post listening
+        self.postsRef.observeEventType(.ChildAdded) { (snapshot: FDataSnapshot!) in
+
+        }
+
+        self.postsRef.observeEventType(.ChildChanged) { (snapshot: FDataSnapshot!) in
+
+        }
+
+        self.postsRef.observeEventType(.ChildRemoved) { (snapshot: FDataSnapshot!) in
+
+        }
+
+        // user listening
+        self.usersRef.observeEventType(.ChildAdded) { (snapshot: FDataSnapshot!) in
+
+        }
+
+        self.usersRef.observeEventType(.ChildChanged) { (snapshot: FDataSnapshot!) in
+
+        }
+
+        self.usersRef.observeEventType(.ChildRemoved) { (snapshot: FDataSnapshot!) in
+
+        }
     }
 }
