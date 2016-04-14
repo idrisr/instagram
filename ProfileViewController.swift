@@ -14,7 +14,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var profileImage: UIImageView!
     var userPosts = [Post]()
     let connectionController = ConnectionController.sharedConnection
-    var user: User!
+    var profileUser: User!
+    let defaults = NSUserDefaults.standardUserDefaults()
 
     @IBOutlet weak var numberOfPhotosLabel: UILabel!
     @IBOutlet weak var numberOfFollowersLabel: UILabel!
@@ -25,7 +26,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        profileUser = connectionController.user
+
         collectionView.dataSource = self
         collectionView.delegate = self
         self.connectionController.allPosts()
@@ -33,6 +35,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         reloadCollectionView()
         numberOfPhotosLabel.text = "\(self.userPosts.count)\nPhotos"
         borderStyleForOutlets()
+        userProfileInfo()
+        
+        bioDescriptionLabel.text = defaults.stringForKey("blog")
+        
     }
     
     func saveBiography(controller: BiographyViewController, text: String) {
@@ -90,8 +96,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
-    func userProfileInfo(user:User) {
-        self.user = user
-        usernameLbl.text = user.email
+    func userProfileInfo() {
+        usernameLbl.text = self.profileUser!.email
     }
 }

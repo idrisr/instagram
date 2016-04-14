@@ -12,14 +12,15 @@ protocol AddBiographyControllerDelegate {
     func saveBiography(controller:BiographyViewController, text:String)
 }
 
-class BiographyViewController: UIViewController, UITextViewDelegate  {
+class BiographyViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var updateButton: UIButton!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var counterLbl: UILabel!
     var delegate: AddBiographyControllerDelegate?
-    var maxCharacters = 76
+    var maxCharacters = 75
     
+    let prefs = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,7 @@ class BiographyViewController: UIViewController, UITextViewDelegate  {
     @IBAction func updateButtonPressed(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
         let biographyText = textView.text
+        prefs.setValue(textView.text, forKey: "blog")
         if let delegate = self.delegate {
             delegate.saveBiography(self, text: biographyText)
         }

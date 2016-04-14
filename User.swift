@@ -16,6 +16,7 @@ struct User {
     let ref: Firebase?
     var uid: String
     var postIDs : [String]
+    var bio: String?
 
     // init from device
     init(email: String, uid:String, ref: Firebase) {
@@ -25,12 +26,14 @@ struct User {
         self.username = ""
         self.ref = ref
         self.postIDs = []
+        self.bio = ""
     }
 
     // init from firebase
     init(snapshot: FDataSnapshot) {
         self.name = snapshot.value["name"] as! String?
         self.email = snapshot.value["email"] as! String
+        self.bio = snapshot.value["bio"] as! String?
         self.username = ""
         self.ref = snapshot.ref
         self.uid = snapshot.key
@@ -47,6 +50,6 @@ struct User {
     }
 
     func toAnyObject() -> AnyObject {
-        return [ "name": name!, "username": username!, "email": email, "posts": postIDs]
+        return [ "name": name!, "username": username!, "email": email, "posts": postIDs, "bio": bio!]
     }
 }
