@@ -73,7 +73,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="484"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nq3-fl-p29" id="adM-od-xDM">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="483"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="483.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caption Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANg-Cu-3lP">
@@ -87,6 +87,7 @@
                                                     <state key="normal" title="User ID Button"/>
                                                     <connections>
                                                         <action selector="onUserIDTapped:" destination="nq3-fl-p29" eventType="touchUpInside" id="rzt-ws-CL0"/>
+                                                        <segue destination="EDb-GX-IaV" kind="show" identifier="userProfileSegue" id="jGH-Fw-OzD"/>
                                                     </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eyb-0n-vCi">
@@ -160,6 +161,24 @@
             </objects>
             <point key="canvasLocation" x="2642" y="-395"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="hbJ-66-ylA">
+            <objects>
+                <viewController id="EDb-GX-IaV" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="N51-Rd-Dc8"/>
+                        <viewControllerLayoutGuide type="bottom" id="wAC-Ft-LTB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="03C-9u-pCL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A9u-jM-gle" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3491" y="-875"/>
+        </scene>
         <!--Comment View Controller-->
         <scene sceneID="AoU-pR-cVQ">
             <objects>
@@ -180,7 +199,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eZ6-bE-57Y" id="CoY-GE-Ehb">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -212,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b5l-KJ-q47" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3395" y="-395"/>
+            <point key="canvasLocation" x="3491" y="-145"/>
         </scene>
         <!--New Post View Controller-->
         <scene sceneID="uvM-Ka-K4S">
@@ -245,7 +264,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hut-iP-T1B" id="1Fe-KH-HUX">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -685,6 +704,7 @@
                         <outlet property="emailTextField" destination="m8v-I9-BsO" id="Zb7-rT-14g"/>
                         <outlet property="passwordTextField" destination="13S-gw-n1V" id="Yry-sN-DR0"/>
                         <outlet property="userNameTextField" destination="n6W-aY-lup" id="Bzp-Y0-jOX"/>
+                        <segue destination="xZ2-SF-5Yf" kind="presentation" identifier="signupToFeedSegue" id="EDt-Gg-8Ka"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pam-B5-M5W" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -719,4 +739,7 @@
         <image name="tabBar_profile" width="35" height="40"/>
         <image name="tabBar_search" width="40" height="40"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="EDt-Gg-8Ka"/>
+    </inferredMetricsTieBreakers>
 </document>
