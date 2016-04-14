@@ -17,6 +17,7 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.navigationController?.navigationBarHidden = true
         self.connectionController.allPosts()
         self.connectionController.reloadPostsDelegate = self
         self.navigationController?.toolbar.hidden = false
