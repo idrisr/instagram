@@ -5,6 +5,13 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="peach-sundress.ttf">
+            <string>peachsundress~</string>
+            <string>peachsundress~</string>
+            <string>peachsundress~</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="aFH-6j-h2o">
@@ -600,14 +607,31 @@
                                 <rect key="frame" x="110" y="98" width="380" height="404"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24V-lb-YjY">
-                                        <rect key="frame" x="78" y="224" width="225" height="30"/>
+                                        <rect key="frame" x="78" y="224" width="225" height="40"/>
                                         <color key="backgroundColor" red="0.4941176471" green="0.81176470590000005" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <fontDescription key="fontDescription" name="peachsundress~" family="peach sundress ~" pointSize="24"/>
                                         <state key="normal" title="Login">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="onLoginButtonTapped:" destination="LLp-qf-gsh" eventType="touchUpInside" id="SFl-l0-csh"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p7n-xY-Ube">
+                                        <rect key="frame" x="78" y="75" width="225" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEE-xA-U7M">
+                                        <rect key="frame" x="78" y="289" width="225" height="40"/>
+                                        <color key="backgroundColor" red="0.4941176471" green="0.81176470590000005" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="peachsundress~" family="peach sundress ~" pointSize="24"/>
+                                        <state key="normal" title="Signup">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="u7B-Vg-TFt" kind="presentation" identifier="SignupSegue" id="94e-R8-SgD"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfz-MP-4ia">
@@ -616,23 +640,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p7n-xY-Ube">
-                                        <rect key="frame" x="78" y="75" width="225" height="44"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEE-xA-U7M">
-                                        <rect key="frame" x="78" y="289" width="225" height="30"/>
-                                        <color key="backgroundColor" red="0.4941176471" green="0.81176470590000005" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <state key="normal" title="Signup">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="u7B-Vg-TFt" kind="presentation" identifier="SignupSegue" id="94e-R8-SgD"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.23137254900000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -640,9 +647,18 @@
                                     <constraint firstAttribute="height" constant="404" id="Jpc-yl-SaU"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Instagram" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T93-ff-VRM">
+                                <rect key="frame" x="110" y="36" width="380" height="123"/>
+                                <fontDescription key="fontDescription" name="peachsundress~" family="peach sundress ~" pointSize="69"/>
+                                <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.23137254901960785" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="T93-ff-VRM" firstAttribute="top" secondItem="V6U-0i-cFi" secondAttribute="bottom" constant="23" id="GPG-VV-uow"/>
+                            <constraint firstItem="T93-ff-VRM" firstAttribute="centerX" secondItem="QfH-k3-KT2" secondAttribute="centerX" id="hXn-Ao-pCx"/>
+                            <constraint firstItem="HMi-WR-iA8" firstAttribute="top" secondItem="T93-ff-VRM" secondAttribute="bottom" constant="434" id="nMD-TB-UTR"/>
                             <constraint firstItem="sp1-TB-K52" firstAttribute="centerX" secondItem="QfH-k3-KT2" secondAttribute="centerX" id="q6G-ZP-bJL"/>
                             <constraint firstItem="sp1-TB-K52" firstAttribute="centerY" secondItem="QfH-k3-KT2" secondAttribute="centerY" id="t8E-BX-Sx4"/>
                         </constraints>
@@ -650,7 +666,9 @@
                     <navigationItem key="navigationItem" id="zKq-kZ-r8I"/>
                     <connections>
                         <outlet property="emailTextField" destination="p7n-xY-Ube" id="YKR-dM-Rq5"/>
+                        <outlet property="loginButton" destination="24V-lb-YjY" id="bmq-6i-gMH"/>
                         <outlet property="passwordTextField" destination="bfz-MP-4ia" id="9VJ-Km-qF0"/>
+                        <outlet property="signupButton" destination="fEE-xA-U7M" id="XUS-o7-HBd"/>
                         <segue destination="xZ2-SF-5Yf" kind="show" identifier="segueToFeed" id="YbN-ag-jWg"/>
                     </connections>
                 </viewController>
