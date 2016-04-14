@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Search-->
+        <!--View Controller-->
         <scene sceneID="aFH-6j-h2o">
             <objects>
                 <viewController id="8rT-EV-1XM" sceneMemberID="viewController">
@@ -33,7 +33,9 @@
                             <constraint firstItem="GXN-yV-MW1" firstAttribute="leading" secondItem="G95-yq-jdg" secondAttribute="leading" id="ptt-fK-h2a"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" id="YvM-LK-rax"/>
+                    <tabBarItem key="tabBarItem" title="" image="tabBar_search" id="YvM-LK-rax">
+                        <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="searchDisplayController" destination="OXm-gi-ev4" id="syS-Fv-P10"/>
                     </connections>
@@ -51,7 +53,7 @@
             </objects>
             <point key="canvasLocation" x="2642" y="-1142"/>
         </scene>
-        <!--Home-->
+        <!--Timeline View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="TimelineViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
@@ -145,7 +147,9 @@
                             <constraint firstAttribute="trailing" secondItem="IpG-BU-z8I" secondAttribute="trailing" id="lJ1-G7-7zO"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" id="2Eh-OB-X5o"/>
+                    <tabBarItem key="tabBarItem" title="" image="tabBar_home" id="2Eh-OB-X5o">
+                        <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -210,7 +214,7 @@
             </objects>
             <point key="canvasLocation" x="3395" y="-395"/>
         </scene>
-        <!--Camera-->
+        <!--New Post View Controller-->
         <scene sceneID="uvM-Ka-K4S">
             <objects>
                 <viewController id="yCs-SU-HTH" customClass="NewPostViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
@@ -303,7 +307,9 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Camera" id="O1N-DV-l7I"/>
+                    <tabBarItem key="tabBarItem" title="" image="tabBar_camera" id="O1N-DV-l7I">
+                        <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <connections>
                         <outlet property="captionTextField" destination="h2b-Lj-rvU" id="Yy2-NM-mOs"/>
@@ -315,7 +321,7 @@
             </objects>
             <point key="canvasLocation" x="1225" y="454"/>
         </scene>
-        <!--Profile-->
+        <!--Profile View Controller-->
         <scene sceneID="a0s-Ko-TPA">
             <objects>
                 <viewController id="Uez-9s-8hX" customClass="ProfileViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
@@ -461,7 +467,10 @@
                             <constraint firstItem="K7S-mV-SQ9" firstAttribute="top" secondItem="kt7-jJ-f0F" secondAttribute="bottom" id="zfa-XY-LJf"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" id="OhV-Yf-4al"/>
+                    <tabBarItem key="tabBarItem" title="" image="tabBar_profile" id="OhV-Yf-4al">
+                        <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-20"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="bioDescriptionLabel" destination="cCP-ly-9aD" id="vzc-aU-iG0"/>
                         <outlet property="collectionView" destination="kt7-jJ-f0F" id="mC6-wP-gkc"/>
@@ -705,5 +714,9 @@
     </scenes>
     <resources>
         <image name="profileImage" width="512" height="512"/>
+        <image name="tabBar_camera" width="55" height="40"/>
+        <image name="tabBar_home" width="40" height="40"/>
+        <image name="tabBar_profile" width="35" height="40"/>
+        <image name="tabBar_search" width="40" height="40"/>
     </resources>
 </document>

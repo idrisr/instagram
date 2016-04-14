@@ -12,15 +12,19 @@ class UserImageCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var userImage: UIImageView!
     var post: Post!
+    var user: User!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         layer.cornerRadius = 5.0
     }
     
-    func configureCell(post: Post) {
+    func configureCell(post: Post, user: User) {
+        self.user = user
         self.post = post
+        
+        if user.uid == post.uid {
         userImage.image = post.image
+        }
     }
-    
 }

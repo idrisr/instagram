@@ -9,6 +9,12 @@
 
 import UIKit
 
+protocol TableViewCellDelegate {
+    func userIDTapped(userName: String)
+    func commentFieldTapped(userName: String)
+    func likeButtonTapped(postID: String)
+}
+
 class FeedTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellImageView: UIImageView!

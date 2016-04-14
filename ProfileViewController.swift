@@ -13,6 +13,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var profileImage: UIImageView!
     var userPosts = [Post]()
+    var checkedPostArray = [Post]()
     let connectionController = ConnectionController.sharedConnection
     var profileUser: User!
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -34,17 +35,26 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        self.connectionController.userPost()
+        self.connectionController.allPosts()
         self.connectionController.reloadUserPostsDelegate = self
         
         reloadCollectionView()
         
         borderStyleForOutlets()
         userProfileInfo()
+        checkIfUserPost()
         
-        numberOfPhotosLabel.text = "\(self.userPosts.count)\nPhotos"
+        numberOfPhotosLabel.text = "\(self.checkedPostArray.count)\nPhotos"
         bioDescriptionLabel.text = defaults.stringForKey("blog")
         
+    }
+    
+    func checkIfUserPost() {
+        for post in userPosts {
+            if post.uid == profileUser.uid {
+                checkedPostArray.append(post)
+            }
+        }
     }
     
     func saveBiography(controller: BiographyViewController, text: String) {
@@ -57,14 +67,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.userPosts.count
+        return self.checkedPostArray.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserImageCell", forIndexPath: indexPath) as! UserImageCollectionViewCell
         let userImage: Post!
-        userImage = userPosts[indexPath.row]
-        cell.configureCell(userImage)
+        let user:User!
+        user = profileUser
+        userImage = checkedPostArray[indexPath.row]
+        cell.configureCell(userImage, user: user)
         return cell
     }
     
@@ -102,11 +114,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func userProfileInfo() {
-        if usernameLbl.text == "" {
-            usernameLbl.text = "Anonymous"
-        } else {
-        usernameLbl.text = self.profileUser!.username
-        }
+       usernameLbl.text = self.profileUser!.username
     }
 }
 
