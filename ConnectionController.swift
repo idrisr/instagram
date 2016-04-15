@@ -207,7 +207,9 @@ class ConnectionController {
         // post listening
         self.postsRef.observeEventType(.ChildAdded) { (snapshot: FDataSnapshot!) in
             let post = Post(snapshot: snapshot)
-            self.posts.append(post)
+            if !self.posts.contains(post) {
+                self.posts.append(post)
+            }
             self.reloadPostsDelegate?.reloadPosts()
         }
 
