@@ -17,9 +17,9 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.connectionController.allPosts()
         self.connectionController.reloadPostsDelegate = self
         self.navigationController?.toolbar.hidden = false
+        self.reloadPosts()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -38,7 +38,6 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
 
         let uid = post.uid!
         let user = connectionController.getUserForUID(uid)
-        print(user!.username!)
         cell.userIDButton.setTitle(user?.username!, forState: .Normal)
         cell.cellImageView.image = post.image
         cell.cellCaptionLabel.text = post.caption
@@ -47,15 +46,16 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     // Mark: ReloadPostsDelegate
-    func reloadModel() {
-        self.posts = self.connectionController.posts
+    func reloadPosts() {
+        self.posts = self.connectionController.getAllPosts()
         dispatch_async(dispatch_get_main_queue()) {
             self.tableView.reloadData()
         }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let cell = sender as! FeedTableViewCell
+        let button = sender as! UIButton
+        let cell = button.superview?.superview as! FeedTableViewCell
         let indexPath = self.tableView.indexPathForCell(cell)
         let post = self.posts[indexPath!.row]
         let user = self.connectionController.getUserForUID(post.uid!)

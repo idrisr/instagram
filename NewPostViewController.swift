@@ -9,7 +9,13 @@
 import UIKit
 import CoreImage
 
-class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class NewPostViewController: UIViewController,
+ UIImagePickerControllerDelegate,
+ UINavigationControllerDelegate,
+ UITableViewDataSource,
+ UITableViewDelegate,
+ UITextFieldDelegate,
+ LoggedInUserChangedDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var captionTextField: UITextField!
@@ -20,7 +26,8 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     var filterNames: [String] = ["Instant", "Chrome", "Noir", "None"]
     var filters: [String] = ["CIPhotoEffectInstant", "CIPhotoEffectChrome", "CIPhotoEffectNoir", "CIColorControls"]
-    
+    var loggedInUser: User?
+
     var originalImage = UIImage()
 
     override func viewDidLoad() {
@@ -28,6 +35,8 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
         imagePicker.delegate = self
         captionTextField.delegate = self
         onCameraButtonTapped(self)
+        loggedInUser = self.connectionController.getLoggedInUser()
+        self.connectionController.loggedInUserChangedDelegate = self
     }
     
     func noCamera() {
@@ -58,7 +67,7 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func onButtonPressed(sender: AnyObject) {
-        let post = Post(image: imageView.image!, caption: captionTextField.text!, user: self.connectionController.user!)
+        let post = Post(image: imageView.image!, caption: captionTextField.text!, user: loggedInUser!)
         connectionController.savePost(post)
         self.tabBarController?.selectedIndex = 0
     }
@@ -108,6 +117,11 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
+    }
+
+    // MARK: LoggedInUserChangedDelegate
+    func loggedInUserChangedSuccess() {
+        self.loggedInUser = connectionController.getLoggedInUser()
     }
     
     

@@ -219,7 +219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b5l-KJ-q47" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4513" y="-89"/>
+            <point key="canvasLocation" x="5325" y="-89"/>
         </scene>
         <!--New Post View Controller-->
         <scene sceneID="uvM-Ka-K4S">
@@ -396,9 +396,6 @@
                                 <state key="normal" title="Edit Profile">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="5LC-5a-K1a" kind="presentation" identifier="AddBioSegue" id="eRq-fM-1az"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6Z-wd-3ub">
                                 <rect key="frame" x="20" y="212" width="145" height="21"/>
@@ -428,7 +425,7 @@
                                             <constraint firstAttribute="width" constant="63" id="2Qc-bM-hJF"/>
                                             <constraint firstAttribute="height" constant="62" id="9F7-ch-tpF"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -438,7 +435,7 @@
                                             <constraint firstAttribute="height" constant="62" id="mPM-e9-Xc6"/>
                                             <constraint firstAttribute="width" constant="74" id="spj-DK-KDN"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -448,14 +445,14 @@
                                             <constraint firstAttribute="height" constant="62" id="uVH-8e-uLX"/>
                                             <constraint firstAttribute="width" constant="75" id="zIT-Hc-KOq"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9oh-gJ-4DH">
-                                <rect key="frame" x="200" y="100" width="133" height="82"/>
+                                <rect key="frame" x="185" y="201" width="116" height="28"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Follow"/>
                                 <connections>
@@ -499,7 +496,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="40r-F0-oVJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2010" y="454"/>
+            <point key="canvasLocation" x="2010" y="524"/>
         </scene>
         <!--Biography View Controller-->
         <scene sceneID="D7n-kA-jgw">
@@ -572,6 +569,7 @@
                             <constraint firstItem="ehJ-Cf-MiR" firstAttribute="leading" secondItem="rKP-kh-hja" secondAttribute="leading" constant="20" id="slo-Js-qYV"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="dpQ-Ga-5ga"/>
                     <connections>
                         <outlet property="counterLbl" destination="Z0J-ET-Crb" id="Gbt-O4-ceB"/>
                         <outlet property="textView" destination="teE-dG-AE9" id="ApC-yr-KRH"/>
@@ -580,7 +578,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b9S-mm-XeW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2802" y="454"/>
+            <point key="canvasLocation" x="3614" y="454"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="QmJ-WO-8rc">

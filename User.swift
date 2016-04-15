@@ -52,14 +52,15 @@ struct User:Equatable {
         }
 
         // set followerIDs
-        if let followers = snapshot.value?["followers"] as? [String] {
+        // stringy typed fucking code!!
+        if let followers = snapshot.value?["followerIDs"] as? [String] {
             self.followerIDs = followers
         } else {
             self.followerIDs = []
         }
 
         // set postIDs
-        if let followings = snapshot.value?["followings"] as? [String] {
+        if let followings = snapshot.value?["followingIDs"] as? [String] {
             self.followingIDs = followings
         } else {
             self.followingIDs = []
@@ -70,8 +71,32 @@ struct User:Equatable {
         postIDs.append(postID)
     }
 
-    mutating func addFollowingIDs(userID:String) {
-        followingIDs.append(userID)
+    mutating func addFollowing(user:User) {
+        followingIDs.append(user.uid)
+    }
+
+    mutating func addFollower(user:User) {
+        followerIDs.append(user.uid)
+    }
+
+    mutating func removeFollowing(user:User) {
+        if let index = followingIDs.indexOf(user.uid) {
+            followingIDs.removeAtIndex(index)
+        }
+    }
+
+    mutating func removeFollower(user:User) {
+        if let index = followerIDs.indexOf(user.uid) {
+            followerIDs.removeAtIndex(index)
+        }
+    }
+
+    func isFollowingUser(user:User) -> Bool {
+        return followingIDs.contains(user.uid)
+    }
+
+    func isFollowedByUser(user:User) -> Bool {
+        return followerIDs.contains(user.uid)
     }
 
     func toAnyObject() -> AnyObject {
