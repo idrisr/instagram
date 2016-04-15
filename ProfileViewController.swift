@@ -13,7 +13,6 @@ class ProfileViewController: UIViewController,
     UICollectionViewDataSource,
     ReloadPostsDelegate,
     UICollectionViewDelegateFlowLayout,
-    AddBiographyControllerDelegate,
     LoggedInUserChangedDelegate,
     UserChangedDelegate {
 
@@ -61,17 +60,17 @@ class ProfileViewController: UIViewController,
         configureFollowingViews()
         borderStyleForOutlets()
         userProfileInfo()
-        checkUserBlogPost()
+//        checkUserBlogPost()
         
         numberOfPhotosLabel.text = "\(self.checkedPostArray.count)\nPhotos"
         numberOfPhotosLabel.text = "\(self.checkedPostArray.count)\nPhotos"
-        bioDescriptionLabel.text = defaults.stringForKey("blog")
+//        bioDescriptionLabel.text = defaults.stringForKey("blog")
 
     }
 
-    func saveBiography(controller: BiographyViewController, text: String) {
-        bioDescriptionLabel.text = text
-    }
+//    func saveBiography(controller: BiographyViewController, text: String) {
+//        bioDescriptionLabel.text = text
+//    }
     
     func reloadPosts() {
         self.userPosts = self.connectionController.getAllPosts()
@@ -114,10 +113,6 @@ class ProfileViewController: UIViewController,
         numberOfPhotosLabel.layer.borderWidth = 1.0
         numberOfPhotosLabel.layer.cornerRadius = 5.0
         
-        bioDescriptionLabel.layer.borderColor = UIColor.blueColor().CGColor
-        bioDescriptionLabel.layer.borderWidth = 1.0
-        bioDescriptionLabel.layer.cornerRadius = 5.0
-        
         numberOfFollowersLabel.layer.borderColor = UIColor.blueColor().CGColor
         numberOfFollowersLabel.layer.borderWidth = 1.0
         numberOfFollowersLabel.layer.cornerRadius = 5.0
@@ -139,14 +134,14 @@ class ProfileViewController: UIViewController,
        usernameLbl.text = self.profileUser!.username
     }
 
-    func checkUserBlogPost() {
-        if defaults.objectForKey("blog") != nil {
-            bioDescriptionLabel.text = defaults.stringForKey("blog")
-        } else {
-            bioDescriptionLabel.text = "Enter bio about yourself here"
-        }
-    }
-    
+//    func checkUserBlogPost() {
+//        if defaults.objectForKey("blog") != nil {
+//            bioDescriptionLabel.text = defaults.stringForKey("blog")
+//        } else {
+//            bioDescriptionLabel.text = "Enter bio about yourself here"
+//        }
+//    }
+//    
     // MARK: UserChangedDelegate
     func userChangedSuccess() {
         // update logged in user information
