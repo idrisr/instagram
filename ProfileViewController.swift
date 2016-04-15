@@ -36,9 +36,20 @@ class ProfileViewController: UIViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    // does Fiaz consider this cheating?
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
         if profileUser == nil {
             self.profileUser = connectionController.getLoggedInUser()
         }
+
+        self.connectionController.reloadPostsDelegate = self
+        self.connectionController.userChangedDelegate = self
+        self.connectionController.loggedInUserChangedDelegate = self
+
 
         self.navigationController?.navigationBarHidden = false
     
@@ -55,17 +66,7 @@ class ProfileViewController: UIViewController,
         numberOfPhotosLabel.text = "\(self.checkedPostArray.count)\nPhotos"
         numberOfPhotosLabel.text = "\(self.checkedPostArray.count)\nPhotos"
         bioDescriptionLabel.text = defaults.stringForKey("blog")
-    }
 
-    // does Fiaz consider this cheating?
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        self.connectionController.reloadPostsDelegate = self
-        self.connectionController.userChangedDelegate = self
-        self.connectionController.loggedInUserChangedDelegate = self
-
-        self.profileUser = connectionController.getLoggedInUser()
     }
 
     func saveBiography(controller: BiographyViewController, text: String) {
