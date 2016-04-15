@@ -87,7 +87,7 @@ class ConnectionController {
     }
 
     func getAllPosts() -> [Post] {
-        return self.posts
+        return self.posts.reverse()
     }
 
     func getUserForUID(uid: String) -> User? {
@@ -103,12 +103,14 @@ class ConnectionController {
         usersRef.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
             for item in snapshot.children {
                 let user = User(snapshot: item as! FDataSnapshot)
+                // can do insert at 0 instead to keep most recent posts on top. O(n)?
                 self.users.append(user)
             }
         }
     }
 
     // change to listener model and privatize
+    // Dont need this because .ChildAdded listener will get called with all data on initial app start
     private func allPosts() {
         postsRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
             for item in snapshot.children {
