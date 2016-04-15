@@ -13,6 +13,7 @@ class SignupViewController: UIViewController, UserCreationDelegate, Authenticati
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var signUpButton: UIButton!
     
     let connectionController = ConnectionController.sharedConnection
 
@@ -20,6 +21,11 @@ class SignupViewController: UIViewController, UserCreationDelegate, Authenticati
         super.viewDidLoad()
         self.connectionController.createUserDelegate = self
         self.connectionController.authenticationDelegate = self
+
+        self.userNameTextField.layer.cornerRadius = 5.0
+        self.emailTextField.layer.cornerRadius = 5.0
+        self.passwordTextField.layer.cornerRadius = 5.0
+        self.signUpButton.layer.cornerRadius = 5.0
     }
 
     @IBAction func onSignupTapped(sender: AnyObject) {
