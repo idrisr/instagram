@@ -24,8 +24,8 @@ class NewPostViewController: UIViewController,
     let imagePicker = UIImagePickerController()
     let connectionController = ConnectionController.sharedConnection
     
-    var filterNames: [String] = ["Instant", "Chrome", "Noir", "None"]
-    var filters: [String] = ["CIPhotoEffectInstant", "CIPhotoEffectChrome", "CIPhotoEffectNoir", "CIColorControls"]
+    var filterNames: [String] = ["None", "Instant", "Chrome", "Noir", "Tonal", "Sepia", "Fade", "Process", "Transfer", "Dots"]
+    var filters: [String] = ["CIColorControls", "CIPhotoEffectInstant", "CIPhotoEffectChrome", "CIPhotoEffectNoir", "CIPhotoEffectTonal", "CISepiaTone", "CIPhotoEffectFade", "CIPhotoEffectProcess", "CIPhotoEffectTransfer", "CIDotScreen"]
     var loggedInUser: User?
 
     var originalImage = UIImage()
@@ -78,6 +78,7 @@ class NewPostViewController: UIViewController,
             imageView.contentMode = .ScaleAspectFit
             imageView.image = pickedImage
             self.originalImage = pickedImage
+            self.tableView.reloadData()
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -95,17 +96,23 @@ class NewPostViewController: UIViewController,
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath)
-        cell.textLabel?.text = filterNames[indexPath.row]
+        cell.textLabel?.text = filterNames[indexPath.row]        
+        let CIfilterName = self.filters[indexPath.row]
+        let context = CIContext(options: nil)
+        let startImage = CIImage(image: self.originalImage)
+        if startImage != nil {
+            let filteredImage = startImage?.imageByApplyingFilter(CIfilterName, withInputParameters: nil)
+            let renderedImage = context.createCGImage(filteredImage!, fromRect: filteredImage!.extent)
+            let orientedImage = UIImage(CGImage: renderedImage, scale: 1, orientation: self.originalImage.imageOrientation)
+            cell.imageView!.image = orientedImage
+        }
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let CIfilterName = filters[indexPath.row]
-        print(CIfilterName)
-        
         let context = CIContext(options: nil)
         let startImage = CIImage(image: self.originalImage)
-        
         let filteredImage = startImage?.imageByApplyingFilter(CIfilterName, withInputParameters: nil)
         let renderedImage = context.createCGImage(filteredImage!, fromRect: filteredImage!.extent)
         let orientedImage = UIImage(CGImage: renderedImage, scale: 1, orientation: self.originalImage.imageOrientation)
