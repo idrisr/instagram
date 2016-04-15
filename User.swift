@@ -59,7 +59,7 @@ struct User:Equatable {
             self.followerIDs = []
         }
 
-        // set postIDs
+        // set followingIDs
         if let followings = snapshot.value?["followingIDs"] as? [String] {
             self.followingIDs = followings
         } else {
@@ -97,6 +97,10 @@ struct User:Equatable {
 
     func isFollowedByUser(user:User) -> Bool {
         return followerIDs.contains(user.uid)
+    }
+
+    func doesLikePost(post:Post) -> Bool {
+        return post.likes.contains(self.uid)
     }
 
     func toAnyObject() -> AnyObject {

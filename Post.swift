@@ -42,7 +42,13 @@ struct Post:Equatable {
         self.ref = snapshot.ref
         self.id = snapshot.key
         self.uid = snapshot.value["uid"] as! String?
-        self.likes = []
+
+        // set followingIDs
+        if let likes = snapshot.value?["likes"] as? [String] {
+            self.likes = likes
+        } else {
+            self.likes = []
+        }
     }
 
     // init from device
@@ -54,8 +60,16 @@ struct Post:Equatable {
         self.likes = []
     }
 
-    func description() -> String {
-        return "\(self.caption)"
+    mutating func addLikeFromUser(user: User) {
+        if !likes.contains(user.uid) {
+            likes.append(user.uid)
+        }
+    }
+
+    mutating func removeLikeFromUser(user: User) {
+        if let index = likes.indexOf(user.uid) {
+            likes.removeAtIndex(index)
+        }
     }
 
     func toAnyObject() -> AnyObject {
@@ -63,7 +77,8 @@ struct Post:Equatable {
             "image": Post.image2String(image),
             "comments": "",
             "caption": caption,
-            "uid": uid!
+            "uid": uid!,
+            "likes": likes
         ]
     }
 }

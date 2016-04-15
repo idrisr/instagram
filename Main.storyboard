@@ -169,6 +169,12 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="css-ad-Dw8">
+                                                    <rect key="frame" x="215" y="410" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ANg-Cu-3lP" firstAttribute="leading" secondItem="o5x-ef-ytI" secondAttribute="trailing" constant="8" id="0la-LI-4Pv"/>
@@ -195,6 +201,8 @@
                                             <outlet property="cellCaptionLabel" destination="ANg-Cu-3lP" id="Ls8-em-206"/>
                                             <outlet property="cellImageView" destination="CFD-d6-gsu" id="ejh-iy-pUO"/>
                                             <outlet property="commentTextField" destination="lgi-dR-EZU" id="y32-g4-vyS"/>
+                                            <outlet property="likeButton" destination="o5x-ef-ytI" id="6LW-f5-Xhi"/>
+                                            <outlet property="likeCountLabel" destination="css-ad-Dw8" id="Vx5-Li-D5K"/>
                                             <outlet property="userIDButton" destination="sMV-hT-jTW" id="MGu-QM-hod"/>
                                             <outlet property="userProfileImageView" destination="Eyb-0n-vCi" id="2Bc-Cs-Jom"/>
                                         </connections>

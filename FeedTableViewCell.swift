@@ -9,6 +9,10 @@
 
 import UIKit
 
+protocol PostCellDelegate {
+    func toggleLikeFromCell(cell: FeedTableViewCell)
+}
+
 
 class FeedTableViewCell: UITableViewCell {
 
@@ -17,7 +21,10 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var userIDButton: UIButton!
-    
+    @IBOutlet weak var likeCountLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    var delegate: PostCellDelegate?
+
     @IBAction func onUserIDTapped(sender: AnyObject) {
     }
     
@@ -25,6 +32,7 @@ class FeedTableViewCell: UITableViewCell {
     }
     
     @IBAction func onLikeButtonTapped(sender: AnyObject) {
+        self.delegate?.toggleLikeFromCell(self)
     }
     
     override func awakeFromNib() {
