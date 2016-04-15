@@ -24,7 +24,7 @@ likes deleted
 
 //  define protocol
 protocol ReloadPostsDelegate {
-    func reloadModel()
+    func reloadPosts()
 }
 
 protocol SavePostDelegate {
@@ -44,36 +44,50 @@ protocol AuthenticationDelegate {
     func userAuthenticatedFail(error: NSError)
 }
 
-// protocol to tell controllers that users array changed
 protocol UserChangedDelegate {
     func userChangedSuccess()
 }
 
+protocol LoggedInUserChangedDelegate {
+    func loggedInUserChangedSuccess()
+}
+
 class ConnectionController {
 
-    var posts = [Post]()
     var userPosts = [Post]()
     var reloadPostsDelegate: ReloadPostsDelegate?
-    var reloadUserPostsDelegate: ReloadUserPostsDelegate?
     var createUserDelegate: UserCreationDelegate?
     var authenticationDelegate: AuthenticationDelegate?
     var userChangedDelegate: UserChangedDelegate?
-    var user: User?
+    var loggedInUserChangedDelegate: LoggedInUserChangedDelegate?
 
     let ref = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/")
     let postsRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/posts")
     let usersRef = Firebase(url: "https://glowing-inferno-2878.firebaseio.com/users")
+    var loginUserRef: Firebase?
 
     static let sharedConnection = ConnectionController()
+
     private var users = [User]()
+    private var posts = [Post]()
+    private var user: User?
 
     init() {
         allUsers()
+        allPosts()
         setupListeners()
+    }
+
+    func getLoggedInUser() -> User {
+        return self.user!
     }
 
     func getAllUsers() -> [User] {
         return self.users
+    }
+
+    func getAllPosts() -> [Post] {
+        return self.posts
     }
 
     func getUserForUID(uid: String) -> User? {
@@ -95,18 +109,14 @@ class ConnectionController {
     }
 
     // change to listener model and privatize
-    func allPosts() {
-        postsRef.observeEventType(.Value, withBlock: { snapshot in
+    private func allPosts() {
+        postsRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
             for item in snapshot.children {
                 let post = Post(snapshot: item as! FDataSnapshot)
                 if !self.posts.contains(post) {
                     self.posts.append(post)
-                    self.userPosts.append(post)
                 }
             }
-            self.posts = self.posts.reverse()
-            self.reloadPostsDelegate?.reloadModel()
-            self.reloadUserPostsDelegate?.reloadCollectionView()
         })
     }
     
@@ -130,6 +140,7 @@ class ConnectionController {
 
         userRef.setValue(user.toAnyObject()) { (error: NSError!, ref: Firebase!) in
             if error == nil {
+                self.userChangedDelegate?.userChangedSuccess()
             } else {
                 print(error.localizedDescription)
             }
@@ -156,9 +167,11 @@ class ConnectionController {
                         if (error == nil) {
                             self.authenticationDelegate?.userAuthenticatedSuccess()
                             let UID = auth.uid
+
                             let userRef = self.usersRef.childByAppendingPath(UID)
                             userRef.observeEventType(.Value, withBlock: { (snapshot: FDataSnapshot!) in
                                 self.user = User(snapshot: snapshot)
+                                self.loggedInUserChangedDelegate?.loggedInUserChangedSuccess()
                             })
                         } else {
                             self.authenticationDelegate?.userAuthenticatedFail(error)
@@ -167,12 +180,12 @@ class ConnectionController {
     }
 
     private func setupListeners() {
-        // post listening
+        // user listening
         self.usersRef.observeEventType(.ChildAdded) { (snapshot: FDataSnapshot!) in
             // add child to array
             let user = User(snapshot: snapshot)
             self.users.append(user)
-            // call delegate telling it something changed
+            self.userChangedDelegate?.userChangedSuccess()
         }
 
         self.usersRef.observeEventType(.ChildChanged) { (snapshot: FDataSnapshot!) in
@@ -180,7 +193,7 @@ class ConnectionController {
             let user = User(snapshot: snapshot)
             let index = self.users.indexOf(user)!
             self.users[index] = user
-            // call delegate telling it something changed
+            self.userChangedDelegate?.userChangedSuccess()
         }
 
         self.usersRef.observeEventType(.ChildRemoved) { (snapshot: FDataSnapshot!) in
@@ -188,20 +201,31 @@ class ConnectionController {
             let user = User(snapshot: snapshot)
             let index = self.users.indexOf(user)!
             self.users.removeAtIndex(index)
-            // call delegate telling it something changed
+            self.userChangedDelegate?.userChangedSuccess()
         }
 
         // post listening
         self.postsRef.observeEventType(.ChildAdded) { (snapshot: FDataSnapshot!) in
-
+            let post = Post(snapshot: snapshot)
+            if !self.posts.contains(post) {
+                self.posts.append(post)
+            }
+            self.reloadPostsDelegate?.reloadPosts()
         }
 
         self.postsRef.observeEventType(.ChildChanged) { (snapshot: FDataSnapshot!) in
-
+            let post = Post(snapshot: snapshot)
+            let index = self.posts.indexOf(post)
+            self.posts[index!] = post
+            self.reloadPostsDelegate?.reloadPosts()
         }
 
         self.postsRef.observeEventType(.ChildRemoved) { (snapshot: FDataSnapshot!) in
-
+            // remove child from array
+            let post = Post(snapshot: snapshot)
+            let index = self.posts.indexOf(post)!
+            self.posts.removeAtIndex(index)
+            self.reloadPostsDelegate?.reloadPosts()
         }
     }
 }

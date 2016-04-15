@@ -8,8 +8,15 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ReloadUserPostsDelegate,UICollectionViewDelegateFlowLayout, AddBiographyControllerDelegate {
-    
+class ProfileViewController: UIViewController,
+    UICollectionViewDelegate,
+    UICollectionViewDataSource,
+    ReloadPostsDelegate,
+    UICollectionViewDelegateFlowLayout,
+    AddBiographyControllerDelegate,
+    LoggedInUserChangedDelegate,
+    UserChangedDelegate {
+
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var numberOfPhotosLabel: UILabel!
@@ -23,51 +30,55 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     var checkedPostArray = [Post]()
     let connectionController = ConnectionController.sharedConnection
     var profileUser: User!
+    var loggedInUser: User!
+
     let defaults = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBarHidden = false
-
-        // user not set or is logged in user
-        if profileUser==nil || profileUser==self.connectionController.user {
-            self.followButton.hidden = true
-        } else {
-            self.followButton.hidden = false
+        if profileUser == nil {
+            self.profileUser = connectionController.getLoggedInUser()
         }
+
+        self.navigationController?.navigationBarHidden = false
 
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-        self.connectionController.allPosts()
-        self.connectionController.reloadUserPostsDelegate = self
-        
-        reloadCollectionView()
-        
+        self.connectionController.reloadPostsDelegate = self
+        self.connectionController.userChangedDelegate = self
+        self.connectionController.loggedInUserChangedDelegate = self
+
+        loggedInUserChangedSuccess()
+        reloadPosts()
+        configureFollowingViews()
         borderStyleForOutlets()
         userProfileInfo()
-        checkIfUserPost()
         checkUserBlogPost()
         
         numberOfPhotosLabel.text = "\(self.checkedPostArray.count)\nPhotos"
         
+
+        numberOfPhotosLabel.text = "\(self.checkedPostArray.count)\nPhotos"
+        bioDescriptionLabel.text = defaults.stringForKey("blog")
+    }
+
+
+    func saveBiography(controller: BiographyViewController, text: String) {
+        bioDescriptionLabel.text = text
     }
     
-    func checkIfUserPost() {
+    func reloadPosts() {
+        self.userPosts = self.connectionController.getAllPosts()
+        checkedPostArray.removeAll()
         for post in userPosts {
             if post.uid == profileUser.uid {
                 checkedPostArray.append(post)
             }
         }
-    }
-    
-    func saveBiography(controller: BiographyViewController, text: String) {
-        bioDescriptionLabel.text = text
-    }
-    
-    func reloadCollectionView() {
-        self.userPosts = self.connectionController.userPosts
-        self.collectionView.reloadData()
+
+        dispatch_async(dispatch_get_main_queue()) {
+            self.collectionView.reloadData()
+        }
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -109,20 +120,20 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         numberOfUsersFollowingLabel.layer.borderWidth = 1.0
         numberOfUsersFollowingLabel.layer.cornerRadius = 5.0
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "AddBioSegue" {
-            let destination = segue.destinationViewController as! BiographyViewController
-            destination.delegate = self
-        }
-    }
-    
+
+    // dont use until VC exists and/or can escape from here
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "AddBioSegue" {
+//            let destination = segue.destinationViewController as! BiographyViewController
+//            destination.delegate = self
+//        }
+//    }
+
     func userProfileInfo() {
        usernameLbl.text = self.profileUser!.username
     }
 
     func checkUserBlogPost() {
-        
         if defaults.objectForKey("blog") != nil {
             bioDescriptionLabel.text = defaults.stringForKey("blog")
         } else {
@@ -130,8 +141,57 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
-    @IBAction func onToggleFollowButtonPressed(sender: AnyObject) {
+    // MARK: UserChangedDelegate
+    func userChangedSuccess() {
+        // update logged in user information
+        dispatch_async(dispatch_get_main_queue()) {
+            self.profileUser = self.connectionController.getUserForUID(self.profileUser.uid)
+            self.configureFollowingViews()
+        }
+    }
 
+    // MARK: LoggedInUserDataChanged
+    func loggedInUserChangedSuccess() {
+        self.loggedInUser = connectionController.getLoggedInUser()
+        self.configureFollowingViews()
+    }
+
+
+    // MARK: IBActions
+    @IBAction func onToggleFollowButtonPressed(sender: AnyObject) {
+        if self.loggedInUser.isFollowingUser(profileUser) {
+            setUnFollow()
+        } else {
+            setFollow()
+        }
+        connectionController.saveUser(loggedInUser)
+        connectionController.saveUser(profileUser)
+    }
+
+    // MARK: private functions
+    private func setFollow() {
+        loggedInUser.addFollowing(profileUser)
+        profileUser.addFollower(loggedInUser)
+    }
+
+    private func setUnFollow() {
+        loggedInUser.removeFollowing(profileUser)
+        profileUser.removeFollower(loggedInUser)
+    }
+
+    private func configureFollowingViews() {
+        // user not set or is logged in user
+        if profileUser == loggedInUser {
+            self.followButton.hidden = true
+        } else {
+            self.followButton.hidden = false
+            if self.loggedInUser.isFollowingUser(profileUser) {
+                self.followButton.setTitle("Unfollow", forState: .Normal)
+            } else {
+                self.followButton.setTitle("Follow", forState: .Normal)
+            }
+        }
+        self.numberOfFollowersLabel.text = "\(self.profileUser.followerIDs.count)\n Followers"
+        self.numberOfUsersFollowingLabel.text = "\(self.profileUser.followingIDs.count)\n Following"
     }
 }
-
