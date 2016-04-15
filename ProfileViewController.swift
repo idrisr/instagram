@@ -105,7 +105,7 @@ class ProfileViewController: UIViewController,
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(131, 131)
+        return CGSizeMake(100, 100)
     }
     
     func borderStyleForOutlets() {

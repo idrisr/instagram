@@ -53,6 +53,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return 85
     }
     
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        performSegueWithIdentifier("SearchToProfileVC", sender: indexPath)
+//    }
+    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         view.endEditing(true)
     }
@@ -67,6 +71,23 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let lower = searchBar.text!.lowercaseString
             filteredUsers = users.filter({$0.username?.rangeOfString(lower) != nil})
             tableView.reloadData()
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "SearchToProfileVC" {
+            let destination = segue.destinationViewController as! ProfileViewController
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let userToSend: User!
+            
+            if searchBarIsSearching {
+                userToSend = filteredUsers[indexPath!.row]
+            } else {
+                userToSend = users[indexPath!.row]
+            }
+            let selectedUser = connectionController.getUserForUID(userToSend.uid)
+            destination.profileUser = selectedUser
         }
     }
 

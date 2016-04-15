@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LLp-qf-gsh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LLp-qf-gsh">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -38,6 +38,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Uez-9s-8hX" kind="show" identifier="SearchToProfileVC" id="0Oq-q7-3Sm"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
@@ -72,7 +75,6 @@
                         <outlet property="searchBar" destination="Kpk-B7-QRq" id="vSF-XS-Tup"/>
                         <outlet property="searchDisplayController" destination="OXm-gi-ev4" id="syS-Fv-P10"/>
                         <outlet property="tableView" destination="0hs-WS-anC" id="zUe-aA-n5t"/>
-                        <segue destination="Uez-9s-8hX" kind="show" identifier="SearchToProfileVC" id="FIh-cN-SAV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ysG-kp-hqe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -864,6 +866,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="EDt-Gg-8Ka"/>
-        <segue reference="jrY-ch-8Xp"/>
+        <segue reference="0Oq-q7-3Sm"/>
     </inferredMetricsTieBreakers>
 </document>
