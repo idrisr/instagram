@@ -23,6 +23,9 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var userIDButton: UIButton!
     @IBOutlet weak var likeCountLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var commentTextView: UITextView!
+    
+    
     var delegate: PostCellDelegate?
 
     @IBAction func onUserIDTapped(sender: AnyObject) {

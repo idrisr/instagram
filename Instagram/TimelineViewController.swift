@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReloadPostsDelegate, PostCellDelegate {
+class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReloadPostsDelegate, PostCellDelegate, UITextFieldDelegate {
     @IBOutlet weak var tableView: UITableView!
     let connectionController = ConnectionController.sharedConnection
     var loggedInUser: User?
@@ -51,6 +51,7 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.likeCountLabel.text = "\(post.likes.count)"
         cell.layer.borderColor = UIColor.blackColor().CGColor
         cell.layer.borderWidth = 2
+        cell.commentTextField.delegate = self
         return cell
     }
 
@@ -91,4 +92,15 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         self.connectionController.savePost(post)
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
+    
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        print(textField.text)
+    }
+    
+    
 }
