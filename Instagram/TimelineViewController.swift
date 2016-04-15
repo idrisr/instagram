@@ -54,7 +54,7 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
 
-    // Mark: ReloadPostsDelegate
+    // MARK: ReloadPostsDelegate
     func reloadPosts() {
         self.posts = self.connectionController.getAllPosts()
         dispatch_async(dispatch_get_main_queue()) {
