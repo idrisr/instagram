@@ -68,7 +68,9 @@ struct User:Equatable {
     }
 
     mutating func addPost(postID:String) {
-        postIDs.append(postID)
+        if !postIDs.contains(postID) {
+            postIDs.append(postID)
+        }
     }
 
     mutating func addFollowing(user:User) {

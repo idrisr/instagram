@@ -23,14 +23,14 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.allowsSelection = false;
-        self.connectionController.reloadPostsDelegate = self
         self.navigationController?.toolbar.hidden = false
-        self.reloadPosts()
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = true
+        self.connectionController.reloadPostsDelegate = self
+        self.reloadPosts()
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,16 +48,16 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.userIDButton.setTitle(user?.username!, forState: .Normal)
         cell.cellImageView.image = post.image
         cell.cellCaptionLabel.text = post.caption
+        cell.likeCountLabel.text = "\(post.likes.count)"
         cell.layer.borderColor = UIColor.blackColor().CGColor
         cell.layer.borderWidth = 2
-        cell.likeCountLabel.text = "\(post.likes.count)"
         return cell
     }
 
     // MARK: ReloadPostsDelegate
     func reloadPosts() {
-        self.posts = self.connectionController.getAllPosts()
         dispatch_async(dispatch_get_main_queue()) {
+            self.posts = self.connectionController.getAllPosts()
             self.tableView.reloadData()
         }
     }
@@ -76,6 +76,8 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
     func toggleLikeFromCell(cell: FeedTableViewCell) {
         let indexPath = self.tableView.indexPathForCell(cell)
         var post = self.posts[indexPath!.row]
+
+        cell.likeCountLabel.text = "\(post.likes.count)"
         if self.loggedInUser!.doesLikePost(post) {
             post.removeLikeFromUser(self.loggedInUser!)
 

@@ -134,7 +134,6 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="onCommentFieldTapped:" destination="nq3-fl-p29" eventType="editingDidEnd" id="OwH-qX-s9y"/>
-                                                        <segue destination="uF9-xO-eah" kind="show" identifier="CommentSegue" id="laT-T8-MUD"/>
                                                     </connections>
                                                 </textField>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CFD-d6-gsu">
@@ -838,6 +837,7 @@
         <!--Navigation Controller-->
         <scene sceneID="FEN-Qt-d6V">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h1p-dB-Dvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lTH-tX-rXb" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="tabBar_home" id="2Eh-OB-X5o">
                         <inset key="imageInsets" minX="3" minY="10" maxX="3" maxY="-5"/>
@@ -852,7 +852,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="rxo-00-mBl"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h1p-dB-Dvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2822" y="-395"/>
         </scene>
