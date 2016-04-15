@@ -184,7 +184,9 @@ class ConnectionController {
         self.usersRef.observeEventType(.ChildAdded) { (snapshot: FDataSnapshot!) in
             // add child to array
             let user = User(snapshot: snapshot)
-            self.users.append(user)
+            if !self.users.contains(user) {
+                self.users.append(user)
+            }
             self.userChangedDelegate?.userChangedSuccess()
         }
 
