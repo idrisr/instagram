@@ -52,7 +52,7 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.layer.borderColor = UIColor.blackColor().CGColor
         cell.layer.borderWidth = 2
         cell.commentTextField.delegate = self
-        cell.commentTextView.text = post.comments.joinWithSeparator("\n")
+        cell.commentTextView.text = post.comments.reverse().joinWithSeparator("\n")
         print(post.comments.joinWithSeparator("\n"))
         return cell
     }
