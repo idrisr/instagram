@@ -44,9 +44,6 @@ class ProfileViewController: UIViewController,
 
         collectionView.dataSource = self
         collectionView.delegate = self
-        self.connectionController.reloadPostsDelegate = self
-        self.connectionController.userChangedDelegate = self
-        self.connectionController.loggedInUserChangedDelegate = self
 
         loggedInUserChangedSuccess()
         reloadPosts()
@@ -56,15 +53,18 @@ class ProfileViewController: UIViewController,
         checkUserBlogPost()
         
         numberOfPhotosLabel.text = "\(self.checkedPostArray.count)\nPhotos"
-        
-
         numberOfPhotosLabel.text = "\(self.checkedPostArray.count)\nPhotos"
         bioDescriptionLabel.text = defaults.stringForKey("blog")
     }
 
     // does Fiaz consider this cheating?
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.connectionController.reloadPostsDelegate = self
+        self.connectionController.userChangedDelegate = self
+        self.connectionController.loggedInUserChangedDelegate = self
+
         self.profileUser = connectionController.getLoggedInUser()
     }
 
