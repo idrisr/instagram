@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReloadPostsDelegate, TableViewCellDelegate {
+class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReloadPostsDelegate {
     @IBOutlet weak var tableView: UITableView!
     let connectionController = ConnectionController.sharedConnection
     var posts = [Post]()
@@ -41,7 +41,6 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.userIDButton.setTitle(user?.username!, forState: .Normal)
         cell.cellImageView.image = post.image
         cell.cellCaptionLabel.text = post.caption
-        cell.delegate = self
         return cell
     }
 
@@ -62,8 +61,4 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         let destinvationVC = segue.destinationViewController as! ProfileViewController
         destinvationVC.profileUser = user
     }
-    
-    func userIDTapped(userName: String) { }
-    func commentFieldTapped(userName: String) { }
-    func likeButtonTapped(postID: String) { }
 }
