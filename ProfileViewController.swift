@@ -12,26 +12,29 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var numberOfPhotosLabel: UILabel!
+    @IBOutlet weak var numberOfFollowersLabel: UILabel!
+    @IBOutlet weak var numberOfUsersFollowingLabel: UILabel!
+    @IBOutlet weak var bioDescriptionLabel: UILabel!
+    @IBOutlet weak var usernameLbl: UILabel!
+    @IBOutlet weak var followButton: UIButton!
+
     var userPosts = [Post]()
     var checkedPostArray = [Post]()
     let connectionController = ConnectionController.sharedConnection
     var profileUser: User!
     let defaults = NSUserDefaults.standardUserDefaults()
 
-    @IBOutlet weak var numberOfPhotosLabel: UILabel!
-    @IBOutlet weak var numberOfFollowersLabel: UILabel!
-    @IBOutlet weak var numberOfUsersFollowingLabel: UILabel!
-    @IBOutlet weak var bioDescriptionLabel: UILabel!
-    @IBOutlet weak var usernameLbl: UILabel!
-    
-//    126,207,175  - Blue  RGB
-//    59,32,32 - Brown  RGB
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBarHidden = false
 
-        profileUser = connectionController.user
+        // user not set or is logged in user
+        if profileUser==nil || profileUser==self.connectionController.user {
+            self.followButton.hidden = true
+        } else {
+            self.followButton.hidden = false
+        }
 
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -117,7 +120,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     func userProfileInfo() {
        usernameLbl.text = self.profileUser!.username
     }
-    
+
     func checkUserBlogPost() {
         
         if defaults.objectForKey("blog") != nil {
@@ -127,6 +130,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
-    
+    @IBAction func onToggleFollowButtonPressed(sender: AnyObject) {
+
+    }
 }
 
