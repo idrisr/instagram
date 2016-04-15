@@ -41,6 +41,8 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.userIDButton.setTitle(user?.username!, forState: .Normal)
         cell.cellImageView.image = post.image
         cell.cellCaptionLabel.text = post.caption
+        cell.layer.borderColor = UIColor.blackColor().CGColor
+        cell.layer.borderWidth = 2
         return cell
     }
 
