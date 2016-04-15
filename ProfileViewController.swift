@@ -41,6 +41,8 @@ class ProfileViewController: UIViewController,
         }
 
         self.navigationController?.navigationBarHidden = false
+        
+        self.collectionView.backgroundColor = UIColor(red: 59.0, green: 32.0, blue: 32.0, alpha: 1.0)
 
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -105,7 +107,7 @@ class ProfileViewController: UIViewController,
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(100, 100)
+        return CGSizeMake(120, 120)
     }
     
     func borderStyleForOutlets() {
