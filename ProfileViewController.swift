@@ -41,9 +41,7 @@ class ProfileViewController: UIViewController,
         }
 
         self.navigationController?.navigationBarHidden = false
-        
-        self.collectionView.backgroundColor = UIColor(red: 59.0, green: 32.0, blue: 32.0, alpha: 1.0)
-
+    
         collectionView.dataSource = self
         collectionView.delegate = self
         self.connectionController.reloadPostsDelegate = self
