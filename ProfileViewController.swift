@@ -62,6 +62,11 @@ class ProfileViewController: UIViewController,
         bioDescriptionLabel.text = defaults.stringForKey("blog")
     }
 
+    // does Fiaz consider this cheating?
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.profileUser = connectionController.getLoggedInUser()
+    }
 
     func saveBiography(controller: BiographyViewController, text: String) {
         bioDescriptionLabel.text = text
