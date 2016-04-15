@@ -52,6 +52,8 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.layer.borderColor = UIColor.blackColor().CGColor
         cell.layer.borderWidth = 2
         cell.commentTextField.delegate = self
+        cell.commentTextView.text = post.comments.joinWithSeparator("\n")
+        print(post.comments.joinWithSeparator("\n"))
         return cell
     }
 
@@ -94,13 +96,16 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+//        return textField.resignFirstResponder() && !(textField.text?.isEmpty)!
         return textField.resignFirstResponder()
     }
     
-    
     func textFieldDidEndEditing(textField: UITextField) {
-        print(textField.text)
+        let cell = textField.superview!.superview as! FeedTableViewCell
+        let indexPath = self.tableView.indexPathForCell(cell)
+        var post = self.posts[indexPath!.row]
+        let comment = self.loggedInUser!.username! + ":\t" + textField.text!
+        post.addComment(comment)
+        self.connectionController.savePost(post)
     }
-    
-    
 }
