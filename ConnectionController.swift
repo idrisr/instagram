@@ -122,9 +122,15 @@ class ConnectionController {
     
     func savePost(post: Post) {
         // save post object
-        let childRef = self.postsRef.childByAutoId()
+        var postRef: Firebase
 
-        childRef.setValue(post.toAnyObject()) { (error: NSError!, ref: Firebase!) in
+        if post.ref == nil {
+            postRef = self.postsRef.childByAutoId()
+        } else {
+            postRef = post.ref!
+        }
+
+        postRef.setValue(post.toAnyObject()) { (error: NSError!, ref: Firebase!) in
             if error == nil {
                 self.user?.addPost(ref.key)
                 let userRef = self.usersRef.childByAppendingPath(self.user?.uid)
@@ -165,6 +171,7 @@ class ConnectionController {
         self.ref!.authUser(email, password: password,
                      withCompletionBlock: { (error, auth) in
                         if (error == nil) {
+                            print("logged in ok")
                             self.authenticationDelegate?.userAuthenticatedSuccess()
                             let UID = auth.uid
 

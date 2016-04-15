@@ -115,25 +115,25 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sMV-hT-jTW">
-                                                    <rect key="frame" x="84" y="8" width="148" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="101" height="30"/>
                                                     <state key="normal" title="User ID Button"/>
                                                     <connections>
                                                         <action selector="onUserIDTapped:" destination="nq3-fl-p29" eventType="touchUpInside" id="rzt-ws-CL0"/>
                                                         <segue destination="Uez-9s-8hX" kind="show" identifier="nonCurrentUserProfileSegue" id="TeM-oC-wVL"/>
                                                     </connections>
                                                 </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eyb-0n-vCi">
-                                                    <rect key="frame" x="22" y="5" width="54" height="36"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eyb-0n-vCi">
+                                                    <rect key="frame" x="22" y="0.0" width="0.0" height="0.0"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5x-ef-ytI">
-                                                    <rect key="frame" x="22" y="296" width="32" height="45"/>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5x-ef-ytI">
+                                                    <rect key="frame" x="22" y="296" width="30" height="30"/>
                                                     <state key="normal" image="heart-empty"/>
                                                     <connections>
                                                         <action selector="onLikeButtonTapped:" destination="nq3-fl-p29" eventType="touchUpInside" id="3ny-J1-NaW"/>
                                                     </connections>
                                                 </button>
-                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lgi-dR-EZU">
-                                                    <rect key="frame" x="22" y="359" width="570" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lgi-dR-EZU">
+                                                    <rect key="frame" x="22" y="334" width="570" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
@@ -148,8 +148,8 @@
                                                         <constraint firstAttribute="height" constant="204" id="UMX-If-3Rc"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Like Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQj-4q-ToP">
-                                                    <rect key="frame" x="62" y="296" width="82" height="36"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQj-4q-ToP">
+                                                    <rect key="frame" x="55" y="301" width="82" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -157,6 +157,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="CFD-d6-gsu" firstAttribute="top" secondItem="adM-od-xDM" secondAttribute="topMargin" constant="76" id="DBP-1Y-OGT"/>
+                                                <constraint firstItem="BQj-4q-ToP" firstAttribute="leading" secondItem="o5x-ef-ytI" secondAttribute="trailing" constant="3" id="Dgm-Dm-2wQ"/>
+                                                <constraint firstItem="o5x-ef-ytI" firstAttribute="leading" secondItem="adM-od-xDM" secondAttribute="leadingMargin" constant="14" id="Qll-Ko-geM"/>
                                                 <constraint firstItem="lgi-dR-EZU" firstAttribute="leading" secondItem="o5x-ef-ytI" secondAttribute="leading" id="Qvs-Lz-asq"/>
                                                 <constraint firstItem="lgi-dR-EZU" firstAttribute="trailing" secondItem="adM-od-xDM" secondAttribute="trailingMargin" id="X9g-27-4Vt"/>
                                                 <constraint firstItem="CFD-d6-gsu" firstAttribute="centerX" secondItem="adM-od-xDM" secondAttribute="centerX" id="Xcb-jJ-EF8"/>
@@ -165,6 +167,8 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="lgi-dR-EZU" secondAttribute="bottom" constant="86.5" id="bLB-AY-DO0"/>
                                                 <constraint firstItem="lgi-dR-EZU" firstAttribute="leading" secondItem="adM-od-xDM" secondAttribute="leadingMargin" constant="14" id="d8i-91-RWs"/>
                                                 <constraint firstItem="ANg-Cu-3lP" firstAttribute="top" secondItem="CFD-d6-gsu" secondAttribute="bottom" constant="8" symbolic="YES" id="jPU-1h-A5F"/>
+                                                <constraint firstItem="o5x-ef-ytI" firstAttribute="top" secondItem="CFD-d6-gsu" secondAttribute="bottom" constant="8" id="n8N-sA-2yQ"/>
+                                                <constraint firstItem="BQj-4q-ToP" firstAttribute="top" secondItem="o5x-ef-ytI" secondAttribute="top" constant="5" id="wO0-qz-hcW"/>
                                                 <constraint firstItem="lgi-dR-EZU" firstAttribute="top" secondItem="o5x-ef-ytI" secondAttribute="bottom" constant="8" symbolic="YES" id="yi1-EU-j64"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -172,6 +176,8 @@
                                             <outlet property="cellCaptionLabel" destination="ANg-Cu-3lP" id="Ls8-em-206"/>
                                             <outlet property="cellImageView" destination="CFD-d6-gsu" id="ejh-iy-pUO"/>
                                             <outlet property="commentTextField" destination="lgi-dR-EZU" id="y32-g4-vyS"/>
+                                            <outlet property="likeButton" destination="o5x-ef-ytI" id="6LW-f5-Xhi"/>
+                                            <outlet property="likeCountLabel" destination="BQj-4q-ToP" id="tWO-8c-4y3"/>
                                             <outlet property="userIDButton" destination="sMV-hT-jTW" id="MGu-QM-hod"/>
                                             <outlet property="userProfileImageView" destination="Eyb-0n-vCi" id="2Bc-Cs-Jom"/>
                                         </connections>

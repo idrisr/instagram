@@ -8,13 +8,18 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReloadPostsDelegate {
+class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReloadPostsDelegate, PostCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     let connectionController = ConnectionController.sharedConnection
+    var loggedInUser: User?
+
     var posts = [Post]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.loggedInUser = connectionController.getLoggedInUser()
+
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.allowsSelection = false;
@@ -39,11 +44,13 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
 
         let uid = post.uid!
         let user = connectionController.getUserForUID(uid)
+        cell.delegate = self
         cell.userIDButton.setTitle(user?.username!, forState: .Normal)
         cell.cellImageView.image = post.image
         cell.cellCaptionLabel.text = post.caption
         cell.layer.borderColor = UIColor.blackColor().CGColor
         cell.layer.borderWidth = 2
+        cell.likeCountLabel.text = "\(post.likes.count)"
         return cell
     }
 
@@ -63,5 +70,23 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         let user = self.connectionController.getUserForUID(post.uid!)
         let destinvationVC = segue.destinationViewController as! ProfileViewController
         destinvationVC.profileUser = user
+    }
+
+    // Mark: PostCellDelegate
+    func toggleLikeFromCell(cell: FeedTableViewCell) {
+        let indexPath = self.tableView.indexPathForCell(cell)
+        var post = self.posts[indexPath!.row]
+        if self.loggedInUser!.doesLikePost(post) {
+            post.removeLikeFromUser(self.loggedInUser!)
+
+            //stringily typed shit!
+            cell.likeButton.setImage(UIImage(named: "heart-empty"), forState: .Normal)
+        } else {
+            post.addLikeFromUser(self.loggedInUser!)
+
+            //stringily typed shit!
+            cell.likeButton.setImage(UIImage(named: "heart-full"), forState: .Normal)
+        }
+        self.connectionController.savePost(post)
     }
 }

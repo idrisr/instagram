@@ -37,7 +37,9 @@ class LoginViewController: UIViewController, AuthenticationDelegate  {
 
     // MARK: AuthenticationDelegate
     func userAuthenticatedSuccess() {
-        performSegueWithIdentifier("segueToFeed", sender: nil)
+        dispatch_async(dispatch_get_main_queue()) {
+            self.performSegueWithIdentifier("segueToFeed", sender: nil)
+        }
     }
 
     func userAuthenticatedFail(error:NSError) {

@@ -123,6 +123,10 @@ class NewPostViewController: UIViewController,
     func loggedInUserChangedSuccess() {
         self.loggedInUser = connectionController.getLoggedInUser()
     }
-    
-    
+
+    // Mark: PostCellDelegate
+    func likeButtonTapped() {
+//        if loggedInUser.doesLikePost(post)
+
+    }
 }
