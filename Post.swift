@@ -49,6 +49,13 @@ struct Post:Equatable {
         } else {
             self.likes = []
         }
+
+        // set comments
+        if let comments = snapshot.value?["comments"] as? [String] {
+            self.comments = comments
+        } else {
+            self.comments = []
+        }
     }
 
     // init from device
@@ -72,10 +79,16 @@ struct Post:Equatable {
         }
     }
 
+    mutating func addComment(comment: String) {
+        if !self.comments.contains(comment) {
+            self.comments.append(comment)
+        }
+    }
+
     func toAnyObject() -> AnyObject {
         return [
             "image": Post.image2String(image),
-            "comments": "",
+            "comments": comments,
             "caption": caption,
             "uid": uid!,
             "likes": likes
