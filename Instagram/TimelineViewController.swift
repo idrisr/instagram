@@ -97,7 +97,6 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         return textField.resignFirstResponder()
     }
     
-    
     func textFieldDidEndEditing(textField: UITextField) {
         print(textField.text)
     }

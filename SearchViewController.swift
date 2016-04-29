@@ -53,10 +53,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return 85
     }
     
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        performSegueWithIdentifier("SearchToProfileVC", sender: indexPath)
-//    }
-    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         view.endEditing(true)
     }

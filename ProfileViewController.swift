@@ -109,7 +109,7 @@ class ProfileViewController: UIViewController,
     }
     
     func borderStyleForOutlets() {
-        numberOfPhotosLabel.layer.borderColor = UIColor.blueColor().CGColor
+        numberOfPhotosLabel.layer.borderColor = UIColor(red: 126.0, green: 207.0, blue: 175.0, alpha: 1.0).CGColor
         numberOfPhotosLabel.layer.borderWidth = 1.0
         numberOfPhotosLabel.layer.cornerRadius = 5.0
         
